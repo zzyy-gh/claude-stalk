@@ -1,0 +1,13 @@
+name: "{SESSION_NAME}"
+sources:
+  # YouTube channel example:
+  # - type: youtube_channel
+  #   id: "UCxxxxxxxxxxxxxxxxxxxxxxxx"
+  #   name: "Channel Name"
+  #
+  # RSS/Atom feed example:
+  # - type: rss
+  #   url: "https://blog.example.com/feed.xml"
+  #   name: "Blog Name"
+frequency: "6h"
+output_dir: null

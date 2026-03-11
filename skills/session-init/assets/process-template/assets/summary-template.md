@@ -1,4 +1,4 @@
-# Update Summary — {DATE}
+# Update Summary — {YYYY-MM-DD HH:MM}
 
 ## Overview
 <!-- 2-3 sentences: what new content was found, across which sources -->
@@ -6,7 +6,7 @@
 ## Items
 
 ### {Item 1 Title}
-**Source**: {source_name} | **Published**: {date}
+**Source**: {source_name} | **Published**: {YYYY-MM-DD HH:MM}
 **Link**: {url}
 
 Key points:

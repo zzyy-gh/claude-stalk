@@ -1,4 +1,5 @@
 name: "{SESSION_NAME}"
+enabled: true
 sources:
   # YouTube channel example:
   # - type: youtube_channel

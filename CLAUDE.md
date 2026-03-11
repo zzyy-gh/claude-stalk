@@ -5,17 +5,15 @@ Monitor YouTube channels and RSS feeds for new content, ingest transcripts, and 
 ## Architecture
 
 ```
-[update] → iterates sessions → [stalk] → finds new items → [custom-skill] → orchestrates pipeline
-                                                                 ↓
-                                                    uses shared skills as building blocks:
-                                                    [ingest] → [transcribe] → custom processing
+[update] → iterates enabled sessions → [process] (per-session pipeline):
+                                        [stalk] → [ingest] → [transcribe] → [summarize]
 ```
 
-- **update**: High-level loop — iterates sessions, stalks for new content, delegates to each session's custom skill
-- **stalk**: Checks YouTube RSS feeds and RSS/Atom feeds for new entries, filters against seen list
+- **update**: Minimal orchestrator — loops enabled sessions, runs each session's process
+- **stalk**: Checks YouTube RSS feeds and RSS/Atom feeds for new entries, filters against stalk history, writes new items to `stalk-history.yaml`
 - **ingest**: Downloads content (yt-dlp for YouTube, WebFetch for articles) into `01-input-*` files
 - **transcribe**: Produces `02-generated-transcript.md` from captions, audio (Groq Whisper MCP), or web content
-- **custom-skill**: Per-session pipeline orchestrator — decides what to do with new items
+- **process**: Per-session pipeline definition — starts with stalk, then ingests/transcribes/summarizes new items
 
 ## Skills
 
@@ -31,9 +29,9 @@ Monitor YouTube channels and RSS feeds for new content, ingest transcripts, and 
 
 ```
 sessions/{name}/
-├── config.yaml          # Sources, frequency, output_dir
-├── seen.yaml            # Already-processed URLs
-├── custom-skill/        # Per-session SKILL.md with assets/examples
+├── config.yaml            # Sources, frequency, enabled flag, output_dir
+├── stalk-history.yaml     # URLs already seen by stalk
+├── process/               # Per-session pipeline definition
 │   ├── SKILL.md
 │   ├── assets/
 │   └── examples/
@@ -41,7 +39,7 @@ sessions/{name}/
     └── YYYY-MM-DD-HHMM/
         ├── {item-slug}/
         │   ├── 01-input-*, metadata.yaml, 02-generated-transcript.md
-        └── summary.md   # Cross-item output from custom skill
+        └── summary.md
 ```
 
 ## Environment
@@ -53,7 +51,7 @@ sessions/{name}/
 ## Conventions
 
 - Read the skill file before executing a stage
-- Custom skills call shared skills (ingest, transcribe) as building blocks
-- `seen.yaml` is only updated after successful processing
+- Stalk owns `stalk-history.yaml` — writes it after finding new items
+- Process is the full pipeline definition per session; update just invokes it
 - Slug format: `short-descriptive-name` (lowercase, hyphenated)
 - Update folder format: `YYYY-MM-DD-HHMM`

@@ -53,14 +53,14 @@ title: "Content Title"
 source_url: "https://..."
 source_type: youtube | podcast | web_article
 transcript_source: youtube_captions | whisper | web_extract
-date_published: 2026-03-11
-date_processed: 2026-03-11T14:30
+date_published: "2026-03-11 14:30"
+date_processed: "2026-03-11 14:30"
 speakers: []
 tags: []
 duration: "1:23:45"
 language: "en"
 stages:
-  ingest: { completed: true, timestamp: "2026-03-11T14:30" }
+  ingest: { completed: true, timestamp: "2026-03-11 14:30" }
   transcribe: { completed: false }
 ```
 
@@ -69,7 +69,7 @@ stages:
 - `source_url` — the input URL
 - `source_type` — youtube, podcast, web_article
 - `transcript_source` — as determined by input type and availability
-- `date_published` — from metadata if available, otherwise leave empty
+- `date_published` — from metadata if available, otherwise omit or leave empty
 - `date_processed` — current timestamp
 - `duration` — from yt-dlp metadata if available
 

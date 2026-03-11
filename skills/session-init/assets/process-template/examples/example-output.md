@@ -1,4 +1,4 @@
-# Update Summary — 2026-03-11
+# Update Summary — 2026-03-11 14:00
 
 ## Overview
 
@@ -7,7 +7,7 @@ Three new videos found across AI research channels covering LLM scaling, multimo
 ## Items
 
 ### Scaling Laws Revisited: What We Got Wrong
-**Source**: AI Research Channel | **Published**: 2026-03-10
+**Source**: AI Research Channel | **Published**: 2026-03-10 09:15
 **Link**: https://www.youtube.com/watch?v=example1
 
 Key points:
@@ -16,7 +16,7 @@ Key points:
 - Smaller models with more post-training can match larger base models
 
 ### Building Reliable AI Agents
-**Source**: Tech Talks | **Published**: 2026-03-10
+**Source**: Tech Talks | **Published**: 2026-03-10 15:30
 **Link**: https://www.youtube.com/watch?v=example2
 
 Key points:
@@ -25,7 +25,7 @@ Key points:
 - Human-in-the-loop checkpoints remain essential for high-stakes tasks
 
 ### Multimodal Understanding: Beyond Vision-Language
-**Source**: AI Research Channel | **Published**: 2026-03-11
+**Source**: AI Research Channel | **Published**: 2026-03-11 08:45
 **Link**: https://www.youtube.com/watch?v=example3
 
 Key points:

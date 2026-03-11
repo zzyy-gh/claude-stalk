@@ -1,4 +1,4 @@
-# Claude Stalker
+# Claude Stalk
 
 Monitor YouTube channels and RSS feeds for new content, ingest transcripts, and run custom per-session processing pipelines.
 

@@ -1,6 +1,6 @@
 ---
 name: session-init
-description: "This skill should be used when the user asks to 'create session', 'new session', 'add session', 'setup stalker', or 'session-init'. It creates a new monitoring session with sources, config, and a processing pipeline."
+description: "This skill should be used when the user asks to 'create session', 'new session', 'add session', 'setup stalk', or 'session-init'. It creates a new monitoring session with sources, config, and a processing pipeline."
 version: "1.1"
 ---
 

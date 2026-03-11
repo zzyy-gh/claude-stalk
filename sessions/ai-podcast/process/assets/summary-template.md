@@ -5,11 +5,14 @@
 
 ## Relevant
 
-### {Item Title}
+### [{Item Title}]({url})
 **Source**: {source_name} | **Published**: {YYYY-MM-DD HH:MM}
-**Link**: {url}
 
-<!-- 2-4 sentences summarizing the content from a VC/AI perspective. What's the key insight, deal signal, market shift, or technology development that matters? -->
+<!-- 2-3 sentence executive summary from a VC/AI perspective. What's the key insight, deal signal, market shift, or technology development that matters? -->
+
+Key moments:
+- [{MM:SS}]({url}&t={seconds}) {Insight or key moment} — {why it matters}
+- [{MM:SS}]({url}&t={seconds}) {Another key moment} — {significance}
 
 ## Skipped
 

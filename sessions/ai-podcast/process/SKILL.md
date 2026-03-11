@@ -50,10 +50,16 @@ After all items are processed:
   - **Relevant**: Covers AI technology, startups, venture capital, fundraising, markets, company building, tech industry trends, founder interviews, investment theses, or adjacent topics (fintech, enterprise software, regulation, etc.) — even mildly relevant counts
   - **Skipped**: Completely unrelated (e.g., pure lifestyle, sports, cooking with no business angle)
 - Produce a briefing using the template in `assets/summary-template.md`:
-  - For each **relevant** item: 2-4 sentence summary highlighting what matters for a VC
+  - For each **relevant** item:
+    - Title as a markdown link: `### [Item Title](url)`
+    - 2-3 sentence executive summary highlighting what matters for a VC
+    - 3-6 bullet points for key moments/insights, each with a `[MM:SS]` timestamp referencing the nearest `[HH:MM:SS]` marker from the transcript
+    - For YouTube items: convert each `[HH:MM:SS]` timestamp to total seconds and make the `[MM:SS]` a clickable link: `[MM:SS]({video_url}&t={seconds})`
+    - For non-YouTube items (articles): use a plain title link and plain `[MM:SS]` timestamps without deep links
   - For **skipped** items: list them with a one-line reason why they were skipped
   - Cross-cutting themes across the relevant items
   - Actionable takeaways from a VC perspective
+- When citing specific claims or insights in key moments, reference the nearest `[HH:MM:SS]` marker from the transcript
 - Save as `{UPDATE_DIR}/summary.md`
 
 ### 5. Export summary

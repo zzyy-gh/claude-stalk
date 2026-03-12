@@ -60,6 +60,10 @@ After all items are processed:
   - Cross-cutting themes across the relevant items
   - Actionable takeaways from a VC perspective
 - When citing specific claims or insights in key moments, reference the nearest `[HH:MM:SS]` marker from the transcript
+  - For items that **could not be transcribed** (missing captions, download failures): list them with the reason
+  - For **channels with no new content**: list them with links to their YouTube channel pages (`https://www.youtube.com/@{handle}`)
+  - **Link all source/channel names** to their YouTube channel page: `[{source_name}](https://www.youtube.com/@{handle})`
+  - **Link all item titles** to their video URL — including in Skipped and Not transcribed tables
 - Save as `{UPDATE_DIR}/summary.md`
 
 ### 5. Export summary

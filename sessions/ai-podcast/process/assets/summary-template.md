@@ -6,7 +6,7 @@
 ## Relevant
 
 ### [{Item Title}]({url})
-**Source**: {source_name} | **Published**: {YYYY-MM-DD HH:MM}
+**Source**: [{source_name}](https://www.youtube.com/@{handle}) | **Published**: {YYYY-MM-DD HH:MM}
 
 <!-- 2-3 sentence executive summary from a VC/AI perspective. What's the key insight, deal signal, market shift, or technology development that matters? -->
 
@@ -18,7 +18,18 @@ Key moments:
 
 | Title | Source | Reason |
 |-------|--------|--------|
-| {title} | {source_name} | {one-line reason} |
+| [{title}]({url}) | [{source_name}](https://www.youtube.com/@{handle}) | {one-line reason} |
+
+## Not transcribed
+
+| Title | Source | Reason |
+|-------|--------|--------|
+| [{title}]({url}) | [{source_name}](https://www.youtube.com/@{handle}) | {one-line reason why transcription failed} |
+
+## No new content
+
+<!-- List channels that had zero new items in this update, each linking to their channel page -->
+- [{channel_name}](https://www.youtube.com/@{handle})
 
 ## Themes
 <!-- Common threads across the relevant items — market trends, emerging consensus, contrarian takes -->

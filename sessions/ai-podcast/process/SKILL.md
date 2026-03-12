@@ -52,6 +52,7 @@ After all items are processed:
 - Produce a briefing using the template in `assets/summary-template.md`:
   - For each **relevant** item:
     - Title as a markdown link: `### [Item Title](url)`
+    - Guest speaker(s) with a brief identifier (role/company). Use "-" for solo essays/monologues or unidentified speakers
     - 2-3 sentence executive summary highlighting what matters for a VC
     - 3-6 bullet points for key moments/insights, each with a `[MM:SS]` timestamp referencing the nearest `[HH:MM:SS]` marker from the transcript
     - For YouTube items: convert each `[HH:MM:SS]` timestamp to total seconds and make the `[MM:SS]` a clickable link: `[MM:SS]({video_url}&t={seconds})`
@@ -66,10 +67,20 @@ After all items are processed:
   - **Link all item titles** to their video URL — including in Skipped and Not transcribed tables
 - Save as `{UPDATE_DIR}/summary.md`
 
-### 5. Export summary
+### 5. Generate HTML and export
+
+**a. Generate HTML**:
+
+- Read `{UPDATE_DIR}/summary.md`
+- Read `assets/summary-html-template.html` — this is the styled wrapper with a `{content}` placeholder
+- Convert the markdown content to semantic HTML with inline styles, following the mapping in `assets/summary-html-styles.md`
+- Insert the converted HTML into the template's `{content}` placeholder
+- Save as `{UPDATE_DIR}/summary.html`
+
+**b. Export**:
 
 - Read `output_dir` from `config.yaml`
 - If `output_dir` is set (not null):
-  - Copy `{UPDATE_DIR}/summary.md` to `{output_dir}/Youtube Channels {YYYY-MM-DD-HHMM}.md`
+  - Copy `{UPDATE_DIR}/summary.html` to `{output_dir}/Youtube Channels {YYYY-MM-DD-HHMM}.html`
   - Ensure the output directory exists (create if needed)
   - Report the exported file path

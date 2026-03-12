@@ -6,7 +6,8 @@
 ## Relevant
 
 ### [{Item Title}]({url})
-**Source**: [{source_name}](https://www.youtube.com/@{handle}) | **Published**: {YYYY-MM-DD HH:MM}
+**Source**: [{source_name}](https://www.youtube.com/@{handle}) | **Guest(s)**: {guest name(s), short description} | **Published**: {YYYY-MM-DD HH:MM}
+<!-- Guest(s): use "-" for solo content or unidentified speakers, or list guest name(s) with a brief identifier -->
 
 <!-- 2-3 sentence executive summary from a VC/AI perspective. What's the key insight, deal signal, market shift, or technology development that matters? -->
 

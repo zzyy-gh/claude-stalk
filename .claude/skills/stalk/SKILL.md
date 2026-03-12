@@ -35,26 +35,19 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
 
 ### YouTube channel
 
-**Primary method — Atom feed:**
-- Fetch `https://www.youtube.com/feeds/videos.xml?channel_id={id}` using WebFetch
-- Extract from each `<entry>`:
-  - `videoId` from `<yt:videoId>`
-  - `title` from `<title>`
-  - `url` as `https://www.youtube.com/watch?v={videoId}`
-  - `published` from `<published>` (ISO 8601)
-  - `author` from `<author><name>`
-- Set `source_type: youtube`
-- Set `source_name` from the config entry's `name` field
-
-**Supplementary — yt-dlp (videos tab):**
-- If the Atom feed returns fewer than 5 items, or if you suspect the feed is incomplete, run:
+- Fetch the latest videos using yt-dlp:
   ```bash
   yt-dlp --flat-playlist --print "%(id)s|%(title)s|%(upload_date)s" --playlist-items 1-15 "https://www.youtube.com/@{handle}/videos"
   ```
 - Parse each line: `videoId|title|YYYYMMDD`
-- Convert `upload_date` to ISO 8601
-- Merge with Atom results (deduplicate by videoId)
-- This is a fallback, not the default — only use when the Atom feed seems insufficient
+- Convert `upload_date` to ISO 8601 (e.g., `20260310` → `2026-03-10T00:00:00Z`)
+- Build item: `url` as `https://www.youtube.com/watch?v={videoId}`, `title`, `published`
+- Set `source_type: youtube`
+- Set `source_name` from the config entry's `name` field
+- Note: `--flat-playlist` does not return `upload_date` — follow up with a batch metadata fetch for new candidates:
+  ```bash
+  yt-dlp --skip-download --print "%(id)s|%(upload_date)s" URL1 URL2 ...
+  ```
 
 ### RSS/Atom feed
 - Fetch the feed URL using WebFetch

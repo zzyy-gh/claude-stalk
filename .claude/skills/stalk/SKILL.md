@@ -1,7 +1,7 @@
 ---
 name: stalk
 description: "This skill should be used when the user asks to 'check feeds', 'check for new videos', 'what's new', 'stalk', or 'check channels'. It checks YouTube channels and RSS/Atom feeds for new content and returns a list of unseen items."
-version: "2.0"
+version: "2.1"
 ---
 
 # Skill: Stalk
@@ -77,14 +77,23 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
 - If a source's items have no `published` dates, fall back to URL dedup
 - Keep items whose `url` is not in the stalk history set
 
-5. **Seed run** (per source, not global):
+5. **Duration check** (YouTube items only):
+   - For each new YouTube item that passed filtering, get its duration:
+     ```bash
+     yt-dlp --skip-download --print "%(duration)s" "https://www.youtube.com/watch?v={videoId}"
+     ```
+   - Run these in parallel (batch all video IDs in one command or concurrent calls) to avoid slowdown
+   - If `duration ≤ 60` seconds or unavailable (`NA`/null): mark as `short: true` — record in stalk history but **exclude from new_items**
+   - This step does not apply to seed runs or RSS items
+
+6. **Seed run** (per source, not global):
    - A source is in seed mode if it has **no entries** in stalk history
    - For seed sources: sort fetched items by `published` (newest first), take the **latest 5**
    - Record these 5 in history (establishing the watermark) but return **zero new items** for this source
    - Report: "Seed: {source_name} — recorded {count} items, latest: {date}"
    - Non-seed sources in the same session are processed normally
 
-6. **Write stalk history**: Append new items + seed items to `sessions/{name}/stalk-history.yaml`:
+7. **Write stalk history**: Append new items (including shorts) + seed items to `sessions/{name}/stalk-history.yaml`:
    ```yaml
    - url: "https://..."
      title: "Item Title"
@@ -92,12 +101,14 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
      source_type: youtube
      published: "2026-03-10T09:15:00Z"
      first_seen: "2026-03-11T14:00:00Z"
+     short: true  # only present when true
    ```
    - `published` is optional (omit if unavailable)
    - `first_seen` is always set to current time
+   - `short` is only set when `true` (omit for normal videos)
    - The **watermark** for each source is derived at read time as `max(published)` for that `source_name` — it's not stored separately
 
-7. **Return** structured list of new items:
+8. **Return** structured list of new items (excludes shorts):
 
 ```yaml
 new_items:

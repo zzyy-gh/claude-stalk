@@ -16,7 +16,7 @@ Processing pipeline tailored for a venture capitalist tracking AI and VC news ac
 
 ### 1. Stalk
 
-Read `skills/stalk/SKILL.md` and execute it for this session (`SESSION_DIR`).
+Read `.claude/skills/stalk/SKILL.md` and execute it for this session (`SESSION_DIR`).
 
 - If no new items are found → report "No new content for ai-podcast" and **stop here**.
 - Otherwise, continue with the new items list.
@@ -33,13 +33,13 @@ Create `{SESSION_DIR}/updates/{YYYY-MM-DD-HHMM}/` for this batch.
 
 **b. Ingest**:
 
-- Read `skills/ingest/SKILL.md` and execute it
+- Read `.claude/skills/ingest/SKILL.md` and execute it
 - URL: the item's `url`
 - Target directory: `{UPDATE_DIR}/{item-slug}/`
 
 **c. Transcribe**:
 
-- Read `skills/transcribe/SKILL.md` and execute it on `{UPDATE_DIR}/{item-slug}/`
+- Read `.claude/skills/transcribe/SKILL.md` and execute it on `{UPDATE_DIR}/{item-slug}/`
 
 ### 4. Summarize — VC/AI Briefing
 
@@ -81,6 +81,6 @@ After all items are processed:
 
 - Read `output_dir` from `config.yaml`
 - If `output_dir` is set (not null):
-  - Copy `{UPDATE_DIR}/summary.html` to `{output_dir}/Youtube Channels {YYYY-MM-DD-HHMM}.html`
+  - Copy `{UPDATE_DIR}/summary.html` to `{output_dir}/Youtube {YYYY-MM-DD-HHMM}.html`
   - Ensure the output directory exists (create if needed)
   - Report the exported file path

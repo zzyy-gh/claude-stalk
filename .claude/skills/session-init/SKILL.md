@@ -49,7 +49,7 @@ Interactive wizard to create a new monitoring session.
 mkdir -p sessions/{name}/process/assets sessions/{name}/process/examples sessions/{name}/updates
 ```
 
-7. **Write `config.yaml`** using the template from `skills/session-init/assets/config-template.yaml`:
+7. **Write `config.yaml`** using the template from `.claude/skills/session-init/assets/config-template.yaml`:
 
 ```yaml
 name: "{Session Name}"
@@ -68,7 +68,7 @@ output_dir: null
 ```
 
 9. **Scaffold process**:
-   - Copy `skills/session-init/assets/process-template/` contents into `sessions/{name}/process/`
+   - Copy `.claude/skills/session-init/assets/process-template/` contents into `sessions/{name}/process/`
    - If the user described specific processing, adapt the SKILL.md accordingly
    - If using defaults, copy the template as-is
 

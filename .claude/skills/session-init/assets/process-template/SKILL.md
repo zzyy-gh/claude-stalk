@@ -16,7 +16,7 @@ Default processing pipeline for a session. Called by `/update` or run directly.
 
 ### 1. Stalk
 
-Read `skills/stalk/SKILL.md` and execute it for this session (`SESSION_DIR`).
+Read `.claude/skills/stalk/SKILL.md` and execute it for this session (`SESSION_DIR`).
 - If no new items are found → report "No new content for {session}" and **stop here**.
 - Otherwise, continue with the new items list.
 
@@ -30,12 +30,12 @@ Create `{SESSION_DIR}/updates/{YYYY-MM-DD-HHMM}/` for this batch.
 - Slugify the title → `{UPDATE_DIR}/{item-slug}/`
 
 **b. Ingest**:
-- Read `skills/ingest/SKILL.md` and execute it
+- Read `.claude/skills/ingest/SKILL.md` and execute it
 - URL: the item's `url`
 - Target directory: `{UPDATE_DIR}/{item-slug}/`
 
 **c. Transcribe**:
-- Read `skills/transcribe/SKILL.md` and execute it on `{UPDATE_DIR}/{item-slug}/`
+- Read `.claude/skills/transcribe/SKILL.md` and execute it on `{UPDATE_DIR}/{item-slug}/`
 
 ### 4. Summarize
 

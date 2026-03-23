@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yt-dlp*)",
+      "Read(custom/**)",
+      "Write(custom/**)"
+    ]
+  },
+  "mcpServers": {
+    "groq": {
+      "command": "uvx",
+      "args": ["groq-mcp"],
+      "env": {
+        "GROQ_API_KEY": "${GROQ_API_KEY}"
+      }
+    }
+  }
+}

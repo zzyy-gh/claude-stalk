@@ -1,0 +1,11 @@
+name: "{SESSION_NAME}"
+enabled: true
+account: "main"
+source: "following"
+days: 1
+prompt: |
+  Focus on AI development, industry trends, macro news,
+  and items a VC might directly or indirectly benefit from knowing.
+  Cover model releases, infrastructure shifts, policy/regulation,
+  funding rounds, product launches, and strategic moves by major players.
+export_dir: null

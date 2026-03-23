@@ -1,0 +1,19 @@
+# Session data
+podcast/**/stalk-history.yaml
+podcast/**/updates/
+social-media/**/updates/
+
+# Ad-hoc runs
+custom/
+
+# Secrets
+.env
+
+# Local settings
+.claude/settings.local.json
+
+# Node
+node_modules/
+
+# Playwright MCP logs
+.playwright-mcp/

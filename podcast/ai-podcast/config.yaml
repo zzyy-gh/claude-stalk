@@ -1,0 +1,57 @@
+name: "ai-podcast"
+enabled: true
+sources:
+  - type: youtube_channel
+    id: "UCSHZKyawb77ixDdsGog4iWA"
+    handle: "lexfridman"
+    name: "Lex Fridman"
+  - type: youtube_channel
+    id: "UCf0PBRjhf0rF8fWBIxTuoWA"
+    handle: "20vc"
+    name: "20VC with Harry Stebbings"
+  - type: youtube_channel
+    id: "UCpQBb0fToph3jrDulwz1iUQ"
+    handle: "iltb_podcast"
+    name: "Invest Like the Best"
+  - type: youtube_channel
+    id: "UCXl4i9dYBrFOabk0xGmbkRA"
+    handle: "dwarkeshpatel"
+    name: "Dwarkesh Patel"
+  - type: youtube_channel
+    id: "UCSI7h9hydQ40K5MJHnCrQvw"
+    handle: "nopriorspodcast"
+    name: "No Priors"
+  - type: youtube_channel
+    id: "UCRhQsN8AVIfZuBNeRV1A37w"
+    handle: "norgesbankinvestmentmanagement"
+    name: "Norges Bank - In Good Company"
+  - type: youtube_channel
+    id: "UCESLZhusAkFfsNsApnjF_Cg"
+    handle: "allin"
+    name: "All-In Podcast"
+  - type: youtube_channel
+    id: "UC6wghONDqjhSw5KsXrnSTuA"
+    handle: "uncappedpod"
+    name: "Uncapped with Jack Altman"
+  - type: youtube_channel
+    id: "UC7UFcUbAd8oyCBWCogVpJ6g"
+    handle: "bloomberg_live"
+    name: "Bloomberg Live"
+  - type: youtube_channel
+    id: "UCkgHtlqtoa73AUIueX5udaQ"
+    handle: "accelvc"
+    name: "Accel Spotlight On"
+  - type: youtube_channel
+    id: "UC9cn0TuPq4dnbTY-CBsm8XA"
+    handle: "a16z"
+    name: "a16z"
+  - type: youtube_channel
+    id: "UCM1guA1E-RHLO2OyfQPOkEQ"
+    handle: "stripe"
+    name: "Stripe - Cheeky Pint"
+  - type: youtube_channel
+    id: "UCUMZ7gohGI9HcU9VNsr2FJQ"
+    handle: "business"
+    name: "Bloomberg Originals"
+frequency: "6h"
+output_dir: "C:\\Users\\zzyy\\OneDrive\\aiconic\\youtube updates"

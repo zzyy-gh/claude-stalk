@@ -32,12 +32,16 @@ Future categories just add new template + styles files — no skill logic change
 
 ### Generate HTML
 
-- Read `SUMMARY`
-- Read the appropriate template — this is the styled wrapper with a `{content}` placeholder
-- Read the appropriate styles mapping
-- Convert the markdown content to semantic HTML with inline styles, following the mapping in the styles file
-- Insert the converted HTML into the template's `{content}` placeholder
-- Save as `OUTPUT`
+Run the converter script:
+```bash
+python scripts/md-to-html.py \
+  --input "{SUMMARY}" \
+  --template ".claude/skills/generate-html/assets/html-template-{CATEGORY}.html" \
+  --category "{CATEGORY}" \
+  --output "{OUTPUT}"
+```
+
+The script handles markdown-to-HTML conversion with all inline styles per the styles reference files. The styles `.md` files in `assets/` serve as documentation for the conversion rules hardcoded in the script.
 
 ### Export (optional)
 

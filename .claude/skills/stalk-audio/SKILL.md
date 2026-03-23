@@ -27,10 +27,7 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
 
 1. **Load config**: Read `podcast/{name}/config.yaml` to get the `sources` list.
 
-2. **Load stalk history**: Read `podcast/{name}/stalk-history.yaml`.
-   - Extract `latest_published` per `source_name` — this is the **watermark** for each source.
-   - Also extract all `url` values into a set (for URL-based fallback).
-   - If file doesn't exist or is empty, all sources are in **seed** mode.
+2. **Load stalk history**: Confirm `podcast/{name}/stalk-history.yaml` exists (or will be created). No manual parsing needed — `filter-stalk.py` handles watermark extraction and URL dedup internally.
 
 3. **Fetch each source**:
 
@@ -48,59 +45,51 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
 - Set `source_name` from the config entry's `name` field
 
 ### RSS/Atom feed
-- Fetch the feed URL using WebFetch
-- Extract from each `<item>` (RSS) or `<entry>` (Atom):
-  - `title` from `<title>`
-  - `url` from `<link>` (RSS) or `<link href="...">` (Atom)
-  - `published` from `<pubDate>` (RSS) or `<published>` (Atom) — **optional**, may not exist
-  - `description` from `<description>` or `<summary>` (first 200 chars)
-- Set `source_type: rss`
-- Set `source_name` from the config entry's `name` field
+- Fetch the feed URL using WebFetch, save content to a temp file (e.g., `/tmp/feed-{source_name}.xml`)
+- Parse with the feed parser script:
+  ```bash
+  python scripts/parse-feed.py --source-name "{name}" --file /tmp/feed-{source_name}.xml
+  ```
+- Output is YAML list of items with `url`, `title`, `source_name`, `source_type: rss`, and optionally `published`, `description`
+- Append the output items to the candidates list
 
-4. **Filter** (per source):
+4. **Write candidates file**: Save all fetched items from step 3 to a temporary YAML file (e.g., `/tmp/stalk-candidates-{timestamp}.yaml`):
+   ```yaml
+   - url: "https://..."
+     title: "Video Title"
+     source_name: "Channel Name"
+     source_type: youtube
+     published: "2026-03-10T14:00:00Z"
+   ```
+   - `published` is optional (omit if unavailable)
 
-### Datetime-aware filtering (when `published` dates are available)
-- Find the **watermark** for this source: the `latest_published` value from stalk history for this `source_name`
-- If watermark exists: keep only items where `published > watermark`
-- Also check URLs against history set as a safety net (skip items already recorded)
+5. **Filter + seed** (via script):
+   ```bash
+   python scripts/filter-stalk.py \
+     --history "podcast/{name}/stalk-history.yaml" \
+     --candidates /tmp/stalk-candidates-{timestamp}.yaml \
+     --now "{TIMESTAMP}"
+   ```
+   - The script handles datetime-aware filtering (watermark comparison), URL dedup fallback, and seed mode (per source)
+   - Output is YAML with three keys: `new_items`, `history_additions`, `seed_reports`
+   - Save the output to a file or parse it directly
 
-### URL-based fallback (when dates are unavailable)
-- If a source's items have no `published` dates, fall back to URL dedup
-- Keep items whose `url` is not in the stalk history set
-
-5. **Metadata + duration check** (YouTube items only):
-   - Run only on candidates that survived filtering in step 4 (not all fetched items). Skip if zero candidates remain.
+6. **Metadata + duration check** (YouTube items only):
+   - Run only on `new_items` from step 5. Skip if zero candidates remain.
    - Batch-fetch dates and durations:
      ```bash
      bash scripts/batch-check-metadata.sh id1 id2 id3 ...
      ```
    - Output is tab-delimited: `videoId\tupload_date_YYYYMMDD\tduration_seconds`
    - Use `upload_date` for watermark filtering if not already available from step 3
-   - If `duration ≤ 60` seconds or empty: mark as `short: true` — record in stalk history but **exclude from new_items**
+   - If `duration <= 60` seconds or empty: mark as `short: true` on the corresponding `history_additions` entry and **remove from new_items**
 
-6. **Seed run** (per source, not global):
-   - A source is in seed mode if it has **no entries** in stalk history
-   - For seed sources: sort fetched items by `published` (newest first), take the **latest 5**
-   - Record these 5 in history (establishing the watermark) but return **zero new items** for this source
-   - Report: "Seed: {source_name} — recorded {count} items, latest: {date}"
-   - Non-seed sources in the same session are processed normally
+7. **Write stalk history**: Append `history_additions` from step 5 (with any `short` flags from step 6) to `podcast/{name}/stalk-history.yaml`
+   - Each entry has: `url`, `title`, `source_name`, `source_type`, `first_seen`, and optionally `published` and `short`
 
-7. **Write stalk history**: Append new items (including shorts) + seed items to `podcast/{name}/stalk-history.yaml`:
-   ```yaml
-   - url: "https://..."
-     title: "Item Title"
-     source_name: "Channel Name"
-     source_type: youtube
-     published: "2026-03-10T09:15:00Z"
-     first_seen: "2026-03-11T14:00:00Z"
-     short: true  # only present when true
-   ```
-   - `published` is optional (omit if unavailable)
-   - `first_seen` is always set to current time
-   - `short` is only set when `true` (omit for normal videos)
-   - The **watermark** for each source is derived at read time as `max(published)` for that `source_name` — it's not stored separately
+8. **Print seed reports**: Print any messages from `seed_reports` (e.g., "Seed: Lex Fridman -- recorded 5 items, latest: 2026-03-10T14:00:00Z")
 
-8. **Return** structured list of new items (excludes shorts):
+9. **Return** structured list of new items (excludes shorts):
 
 ```yaml
 new_items:
@@ -116,9 +105,7 @@ new_items:
 
 - If a feed fetch fails, log the error and continue with remaining sources.
 - Report any fetch failures at the end.
-- Seed mode is **per source**, not per session — adding a new source to an existing session seeds just that source.
-- The watermark is always derived as `max(published)` from history entries for that source_name. No separate field needed.
-- Always use URL check as a safety net even when filtering by date, to avoid duplicate entries.
+- Filtering, seed detection, watermark comparison, and URL dedup are all handled by `scripts/filter-stalk.py` -- do not reimplement this logic inline.
 
 ## Output
 

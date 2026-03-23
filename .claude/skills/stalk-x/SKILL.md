@@ -4,6 +4,7 @@ description: >
   Scrapes X.com feeds (Following or lists) — handles session detection, login flow,
   and feed scraping. Returns raw post data for downstream analysis.
   Trigger phrases: "scrape feed", "scrape following", "scrape my X", "stalk x".
+version: "1.0"
 compatibility: "Requires playwright npm package installed."
 ---
 

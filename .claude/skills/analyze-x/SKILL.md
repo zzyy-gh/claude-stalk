@@ -4,6 +4,7 @@ description: >
   Triages scraped X feed data — decides which links and images to investigate,
   analyzes them, and produces enriched notes for digest generation.
   Trigger phrases: "analyze posts", "triage feed", "analyze feed data".
+version: "1.0"
 compatibility: "Requires playwright-headless MCP server for visiting external links and viewing images."
 ---
 

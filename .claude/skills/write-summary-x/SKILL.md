@@ -4,6 +4,7 @@ description: >
   Generates the final markdown digest from analyzed X feed data.
   Handles formatting, URL verification, and quality checks.
   Trigger phrases: "write digest", "generate digest", "build x summary".
+version: "1.0"
 compatibility: "None — file I/O only."
 ---
 
@@ -108,18 +109,17 @@ Include hyperlinked @handles. Half a page max.
 
 ## URL Verification (mandatory before writing)
 
-Before generating digest content, build a URL lookup map from the scrape file:
+**Pre-write:** Build a URL lookup map from the scrape file:
+```bash
+python scripts/verify-x-urls.py --scrape "{UPDATE_DIR}/scrape.json" --build-map
+```
+Output is a YAML map of `handle -> [{text_prefix, url}]`. Use this map when writing the digest — every post URL (`x.com/.../status/...`) MUST be looked up from this map by handle + text substring. **Never construct or guess status URLs.** If you can't find a matching URL, omit the link rather than fabricate one.
 
-1. Read `{UPDATE_DIR}/scrape.json`
-2. Build a map: `handle → [{text_prefix (first 60 chars), url}]`
-3. When writing the digest, every post URL (`x.com/.../status/...`) MUST be looked up from this map — match by handle + text substring
-4. **Never construct or guess status URLs.** If you can't find a matching URL in the map, omit the link rather than fabricate one.
-
-**Post-write verification step:**
-
-1. Grep the generated markdown for all `x.com/.*/status/` URLs
-2. Check each against the scrape JSON — every URL must exist in the file
-3. If any don't match, fix them (look up the correct URL from the map) and re-save
+**Post-write:** Verify all URLs in the generated digest:
+```bash
+python scripts/verify-x-urls.py --scrape "{UPDATE_DIR}/scrape.json" --digest "{UPDATE_DIR}/digest.md"
+```
+Exit code 0 = all URLs verified. Exit code 1 = missing URLs found — check `missing_details` in the output and fix them.
 
 ---
 

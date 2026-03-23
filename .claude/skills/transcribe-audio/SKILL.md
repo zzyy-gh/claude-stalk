@@ -41,6 +41,7 @@ The output is `02-generated-transcript.md` — the single source of truth for do
 - Request `verbose_json` format to get segment-level timestamps
 - Merge segments into paragraphs using the same logic as youtube_captions:
   - New paragraph + `[HH:MM:SS]` marker on 4+ second gaps, speaker changes, or ~175 words accumulated
+- TODO: Extract this segment-merging logic into a script (like `vtt-to-transcript.py` handles VTT). Currently runs as inline code.
 
 ### web_extract
 - Read `01-input-article.html` or `01-input-article.md`

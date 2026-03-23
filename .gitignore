@@ -15,5 +15,8 @@ custom/
 # Node
 node_modules/
 
+# Python
+__pycache__/
+
 # Playwright MCP logs
 .playwright-mcp/

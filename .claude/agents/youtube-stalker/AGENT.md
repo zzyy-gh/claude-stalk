@@ -1,16 +1,16 @@
 ---
-name: youtuber
-description: "Full YouTube/audio pipeline: checks feeds, ingests, transcribes, and produces summaries. Trigger: 'run update', 'check all', 'scheduled check', 'run youtuber'."
+name: youtube-stalker
+description: "Full YouTube/audio pipeline: checks feeds, ingests, transcribes, and produces summaries. Trigger: 'run update', 'check all', 'scheduled check', 'run youtube-stalker'."
 version: "1.0"
 ---
 
-# Agent: Youtuber
+# Agent: YouTube Stalker
 
 Full pipeline orchestrator for YouTube/audio content. Checks feeds, ingests new content, transcribes, and produces summaries.
 
 ## Inputs
 
-- `SESSION`: session name or `all` (default: all enabled sessions under `output/youtuber/`)
+- `SESSION`: session name or `all` (default: all enabled sessions under `output/youtube-stalker/`)
 
 ### Setup
 
@@ -23,24 +23,24 @@ Do not guess or infer the time from other sources -- always check the real clock
 ## Multi-session orchestration
 
 When `SESSION` is `all` (or omitted):
-- List all `output/youtuber/*/config.yaml`
+- List all `output/youtube-stalker/*/config.yaml`
 - Filter to `enabled: true`
 - Run the pipeline below for each enabled session
 - Print final summary across sessions
 
 When `SESSION` is a specific name:
-- Run the pipeline for `output/youtuber/{SESSION}/` only
+- Run the pipeline for `output/youtube-stalker/{SESSION}/` only
 
 ## Notification
 
 Always send Telegram notifications at these points:
 
-- On start: `bash scripts/notify-telegram.sh "[claude-stalk] Youtuber check started."`
+- On start: `bash scripts/notify-telegram.sh "[claude-stalk] YouTube Stalker check started."`
 - On input needed: `bash scripts/notify-telegram.sh "[claude-stalk] Need your input -- check Remote Control"`
 
 ## Pipeline (per session)
 
-`SESSION_DIR` = `output/youtuber/{name}/`
+`SESSION_DIR` = `output/youtube-stalker/{name}/`
 
 ### 0. Check for pending retries
 

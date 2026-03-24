@@ -6,8 +6,9 @@ Unified content monitoring and intelligence platform. Monitors YouTube channels,
 
 | Category | Directory | Sources | Agent |
 |----------|-----------|---------|-------|
-| **Youtuber** | `output/youtuber/` | YouTube channels, RSS feeds | `youtuber` |
-| **Xmen** | `output/xmen/` | X lists, X Following feed | `xmen` |
+| **YouTube Stalker** | `output/youtube-stalker/` | YouTube channels, RSS feeds | `youtube-stalker` |
+| **X Stalker** | `output/x-stalker/` | X lists, X Following feed | `x-stalker` |
+| **YouTube Adhoc** | `output/youtube-adhoc/` | Single YouTube URLs | `youtube-adhoc` |
 
 ## Agents
 
@@ -15,9 +16,9 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 
 | Agent | Purpose | Trigger |
 |---|---|---|
-| **youtuber** | Full YouTube/audio pipeline: stalk, ingest, transcribe, analyze, summarize | "run update", "check all", "scheduled check" |
-| **xmen** | X digest pipeline: scrape, analyze, summarize | "run digest", "digest my feed", "run x digest" |
-| **adhoc** | Ad-hoc processing of a single URL | "summarize this", "summarize this video" |
+| **youtube-stalker** | Full YouTube/audio pipeline: stalk, ingest, transcribe, analyze, summarize | "run update", "check all", "scheduled check" |
+| **x-stalker** | X digest pipeline: scrape, analyze, summarize | "run digest", "digest my feed", "run x digest" |
+| **youtube-adhoc** | Ad-hoc processing of a single YouTube URL | "summarize this", "summarize this video" |
 | **tester** | Quality checks on workspace (docs, scripts, configs) | "test", "verify", "run checks" |
 
 ## Skills
@@ -51,7 +52,7 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 ## Directory Structure
 
 ```
-output/youtuber/{name}/
+output/youtube-stalker/{name}/
 ├── config.yaml
 ├── stalk-history.yaml
 ├── retry.yaml
@@ -64,7 +65,7 @@ output/youtuber/{name}/
         ├── summary.md
         └── summary.html
 
-output/xmen/{name}/
+output/x-stalker/{name}/
 ├── config.yaml
 └── updates/
     └── YYYY-MM-DD/
@@ -73,7 +74,7 @@ output/xmen/{name}/
         ├── digest.md
         └── digest.html
 
-custom/{slug}/                    # Ad-hoc runs
+output/youtube-adhoc/{slug}/      # Ad-hoc runs
 ```
 
 ## Pipeline Structure
@@ -106,5 +107,5 @@ All scripts live in `scripts/`:
 
 - Read the skill/agent file before executing a stage
 - Slug format: `short-descriptive-name` (lowercase, hyphenated). Use `bash scripts/slugify.sh "$title"` for canonical slugification.
-- Update folder format: `YYYY-MM-DD-HHMM-TZ` (youtuber) or `YYYY-MM-DD` (xmen)
+- Update folder format: `YYYY-MM-DD-HHMM-TZ` (youtube-stalker) or `YYYY-MM-DD` (x-stalker)
 - Timestamps: always use local timezone. Agents capture the full timestamp with timezone once at the start of a run via `bash scripts/get-timestamp.sh` (line 1 = display format, line 2 = path-safe format). Skills never run `date` — they use the agent-provided timestamp.

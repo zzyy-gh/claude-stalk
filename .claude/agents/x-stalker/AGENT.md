@@ -1,16 +1,16 @@
 ---
-name: xmen
-description: "X/Twitter digest pipeline: scrapes feeds, analyzes posts, produces digests. Trigger: 'run digest', 'digest my feed', 'run x digest', 'run xmen'."
+name: x-stalker
+description: "X/Twitter digest pipeline: scrapes feeds, analyzes posts, produces digests. Trigger: 'run digest', 'digest my feed', 'run x digest', 'run x-stalker'."
 version: "1.0"
 ---
 
-# Agent: Xmen
+# Agent: X Stalker
 
 Full pipeline orchestrator for X (Twitter) feed digests. Scrapes feeds, analyzes posts, and produces markdown + HTML digests.
 
 ## Inputs
 
-- `SESSION`: session name or `all` (default: all enabled sessions under `output/xmen/`)
+- `SESSION`: session name or `all` (default: all enabled sessions under `output/x-stalker/`)
 
 ### Setup
 
@@ -19,13 +19,13 @@ Run `node scripts/now.js` to get the local date for filenames.
 ## Multi-session orchestration
 
 When `SESSION` is `all` (or omitted):
-- List all `output/xmen/*/config.yaml`
+- List all `output/x-stalker/*/config.yaml`
 - Filter to `enabled: true`
 - Process sessions sequentially — each session completes its full pipeline before the next starts
 - Print final summary across sessions
 
 When `SESSION` is a specific name:
-- Run the pipeline for `output/xmen/{SESSION}/` only
+- Run the pipeline for `output/x-stalker/{SESSION}/` only
 
 ## Notification
 
@@ -36,7 +36,7 @@ Send Telegram notifications:
 
 ## Pipeline (per session)
 
-`SESSION_DIR` = `output/xmen/{name}/`
+`SESSION_DIR` = `output/x-stalker/{name}/`
 
 ### 1. Load config
 

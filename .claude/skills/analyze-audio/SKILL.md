@@ -1,6 +1,6 @@
 ---
 name: analyze-audio
-description: "Extract candidate key moments from a transcript into candidates.yaml. Called by podcast and adhoc agents."
+description: "Extract candidate key moments from a transcript into candidates.yaml. Called by youtube-stalker and youtube-adhoc agents."
 version: "1.0"
 forked: true
 ---

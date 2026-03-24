@@ -11,9 +11,9 @@ Check configured sources for new content using a datetime-aware algorithm. Retur
 
 ## Inputs
 
-- A session directory or session name (folder under `output/youtuber/`)
-- Reads `output/youtuber/{name}/config.yaml` for source list
-- Reads `output/youtuber/{name}/stalk-history.yaml` for already-seen items and watermarks
+- A session directory or session name (folder under `output/youtube-stalker/`)
+- Reads `output/youtube-stalker/{name}/config.yaml` for source list
+- Reads `output/youtube-stalker/{name}/stalk-history.yaml` for already-seen items and watermarks
 
 ## Algorithm Overview
 
@@ -25,9 +25,9 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
 
 ## Steps
 
-1. **Load config**: Read `output/youtuber/{name}/config.yaml` to get the `sources` list.
+1. **Load config**: Read `output/youtube-stalker/{name}/config.yaml` to get the `sources` list.
 
-2. **Load stalk history**: Confirm `output/youtuber/{name}/stalk-history.yaml` exists (or will be created). No manual parsing needed — `filter-stalk.py` handles watermark extraction and URL dedup internally.
+2. **Load stalk history**: Confirm `output/youtube-stalker/{name}/stalk-history.yaml` exists (or will be created). No manual parsing needed — `filter-stalk.py` handles watermark extraction and URL dedup internally.
 
 3. **Fetch each source**:
 
@@ -66,7 +66,7 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
 5. **Filter + seed** (via script):
    ```bash
    python scripts/filter-stalk.py \
-     --history "output/youtuber/{name}/stalk-history.yaml" \
+     --history "output/youtube-stalker/{name}/stalk-history.yaml" \
      --candidates /tmp/stalk-candidates-{timestamp}.yaml \
      --now "{TIMESTAMP}"
    ```
@@ -84,7 +84,7 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
    - Use `upload_date` for watermark filtering if not already available from step 3
    - If `duration <= 60` seconds or empty: mark as `short: true` on the corresponding `history_additions` entry and **remove from new_items**
 
-7. **Write stalk history**: Append `history_additions` from step 5 (with any `short` flags from step 6) to `output/youtuber/{name}/stalk-history.yaml`
+7. **Write stalk history**: Append `history_additions` from step 5 (with any `short` flags from step 6) to `output/youtube-stalker/{name}/stalk-history.yaml`
    - Each entry has: `url`, `title`, `source_name`, `source_type`, `first_seen`, and optionally `published` and `short`
 
 8. **Print seed reports**: Print any messages from `seed_reports` (e.g., "Seed: Lex Fridman -- recorded 5 items, latest: 2026-03-10T14:00:00Z")

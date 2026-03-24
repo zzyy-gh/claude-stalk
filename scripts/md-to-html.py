@@ -101,7 +101,7 @@ def _apply_inline_formatting_audio_list(text):
 # Table parsing
 # ---------------------------------------------------------------------------
 
-def _parse_table(lines):
+def _parse_table(lines, category):
     """Parse markdown table lines into HTML."""
     result = []
     result.append('<table style="width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px;">')
@@ -122,7 +122,7 @@ def _parse_table(lines):
             for cell in cells:
                 result.append(
                     f'<th style="background-color:#f1f3f5; text-align:left; padding:8px 12px; '
-                    f'font-weight:600; color:#495057; border:1px solid #dee2e6;">{html.escape(cell)}</th>'
+                    f'font-weight:600; color:#495057; border:1px solid #dee2e6;">{_apply_inline_formatting(cell, category)}</th>'
                 )
             result.append('</tr>')
             header_done = True
@@ -130,7 +130,7 @@ def _parse_table(lines):
             result.append('<tr>')
             for cell in cells:
                 result.append(
-                    f'<td style="padding:8px 12px; color:#495057; border:1px solid #dee2e6;">{html.escape(cell)}</td>'
+                    f'<td style="padding:8px 12px; color:#495057; border:1px solid #dee2e6;">{_apply_inline_formatting(cell, category)}</td>'
                 )
             result.append('</tr>')
 
@@ -212,7 +212,7 @@ def convert_markdown(md_text, category):
     def close_table():
         nonlocal in_table, table_lines
         if in_table:
-            output.append(_parse_table(table_lines))
+            output.append(_parse_table(table_lines, category))
             table_lines = []
             in_table = False
 

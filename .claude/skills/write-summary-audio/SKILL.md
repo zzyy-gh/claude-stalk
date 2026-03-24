@@ -1,6 +1,6 @@
 ---
 name: write-summary-audio
-description: "Read candidates.yaml files and a template to produce a VC/AI briefing summary for podcast/YouTube content. Supports batch (multi-item update) and single (adhoc) modes."
+description: "Read candidates.yaml files and a template to produce a VC/AI briefing summary for podcast/YouTube content. Supports batch (multi-item update) and single (youtube-adhoc) modes."
 version: "1.0"
 forked: true
 ---
@@ -14,7 +14,7 @@ Read candidate key moments and a template to produce a VC/AI briefing summary.
 - `ITEM_DIRS`: list of item directory paths. Each directory contains `candidates.yaml` and `01-input-yt-metadata.json`.
 - `TEMPLATE`: (optional) path to summary template. Default: `.claude/skills/write-summary-audio/assets/summary-audio-template.md`
 - `OUTPUT`: path to write `summary.md`
-- `MODE`: `batch` (multi-item update) or `single` (adhoc single-item)
+- `MODE`: `batch` (multi-item update) or `single` (youtube-adhoc single-item)
 - `TIMESTAMP`: (batch mode only) for the summary heading date
 
 ## Execution

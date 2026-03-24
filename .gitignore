@@ -1,10 +1,9 @@
 # Session data
-output/youtuber/**/stalk-history.yaml
-output/youtuber/**/updates/
-output/xmen/**/updates/
+output/youtube-stalker/**/updates/
+output/x-stalker/**/updates/
 
 # Ad-hoc runs
-custom/
+output/youtube-adhoc/
 
 # Secrets
 .env

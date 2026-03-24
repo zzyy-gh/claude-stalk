@@ -2,8 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(yt-dlp*)",
-      "Read(custom/**)",
-      "Write(custom/**)"
+      "Read(output/youtube-adhoc/**)",
+      "Write(output/youtube-adhoc/**)"
     ]
   },
   "mcpServers": {

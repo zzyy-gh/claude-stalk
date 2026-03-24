@@ -1,6 +1,6 @@
 ---
 name: session-init
-description: "Create a new monitoring session. Trigger: 'create session', 'new session', 'add session', 'session-init'. Supports youtuber (audio) and xmen (X) session types."
+description: "Create a new monitoring session. Trigger: 'create session', 'new session', 'add session', 'session-init'. Supports youtube-stalker (audio) and x-stalker (X) session types."
 version: "2.0"
 ---
 
@@ -11,8 +11,8 @@ Interactive wizard to create a new monitoring session for any supported content 
 ## Steps
 
 1. **Ask for category**:
-   - `youtuber` — YouTube channels and RSS feeds (audio/video content)
-   - `xmen` — X (Twitter) lists or Following feed
+   - `youtube-stalker` — YouTube channels and RSS feeds (audio/video content)
+   - `x-stalker` — X (Twitter) lists or Following feed
    - Future: `website` — web monitoring
 
 2. **Ask for session name**:
@@ -22,7 +22,7 @@ Interactive wizard to create a new monitoring session for any supported content 
 
 3. **Category-specific source setup**:
 
-### Youtuber (audio)
+### YouTube Stalker (audio)
 
 Ask for sources (one at a time, loop until user says done):
 
@@ -39,7 +39,7 @@ Ask for sources (one at a time, loop until user says done):
 
 **Frequency**: Default `6h`, options: `1h`, `6h`, `12h`, `24h`
 
-### Xmen (X)
+### X Stalker (X)
 
 - **Source**: `"following"` or an X list URL
 - **Account**: Session identifier for multi-account management (default: `"main"`)
@@ -52,17 +52,17 @@ Ask for sources (one at a time, loop until user says done):
 
 5. **Create session structure**:
 
-### Youtuber
+### YouTube Stalker
 ```bash
-mkdir -p output/youtuber/{name}/updates
+mkdir -p output/youtube-stalker/{name}/updates
 ```
 Use template: `.claude/skills/session-init/assets/config-template-audio.yaml`
 
 Write `stalk-history.yaml` and `retry.yaml` as `[]`.
 
-### Xmen
+### X Stalker
 ```bash
-mkdir -p output/xmen/{name}/updates
+mkdir -p output/x-stalker/{name}/updates
 ```
 Use template: `.claude/skills/session-init/assets/config-template-x.yaml`
 

@@ -1,12 +1,12 @@
 ---
-name: adhoc
-description: "Ad-hoc processing of a single URL. Detects URL type (YouTube, X, article) and routes to the appropriate pipeline. Trigger: 'summarize', 'summarize this', 'summarize this video'."
+name: youtube-adhoc
+description: "Ad-hoc processing of a single YouTube URL. Routes through the audio pipeline. Trigger: 'summarize', 'summarize this', 'summarize this video'."
 version: "1.0"
 ---
 
-# Agent: Adhoc
+# Agent: YouTube Adhoc
 
-Run the full pipeline on a single URL, producing output in `custom/{slug}/`.
+Run the full audio pipeline on a single YouTube URL, producing output in `output/youtube-adhoc/{slug}/`.
 
 ## Inputs
 
@@ -36,19 +36,19 @@ Do not guess or infer the time from other sources -- always check the real clock
 
 1. **Ingest**: Execute the ingest-audio skill
    - URL: the provided URL
-   - Target directory: `custom/temp-ingest/`
-2. **Read metadata**: Read `custom/temp-ingest/metadata.yaml` to get the title
+   - Target directory: `output/youtube-adhoc/temp-ingest/`
+2. **Read metadata**: Read `output/youtube-adhoc/temp-ingest/metadata.yaml` to get the title
 3. **Slugify**: `slug=$(bash scripts/slugify.sh "$title")`
-4. **Guard**: If `custom/{slug}/` already exists:
+4. **Guard**: If `output/youtube-adhoc/{slug}/` already exists:
    - Read its `metadata.yaml` and compare `source_url` to the current URL
    - **Same URL**: stop and report it was already processed
    - **Different URL**: append `-2` (or next available number) to the slug
-5. **Rename**: `custom/temp-ingest/` to `custom/{slug}/`
-6. **Transcribe**: Execute the transcribe-audio skill on `custom/{slug}/`
+5. **Rename**: `output/youtube-adhoc/temp-ingest/` to `output/youtube-adhoc/{slug}/`
+6. **Transcribe**: Execute the transcribe-audio skill on `output/youtube-adhoc/{slug}/`
 
 ### 3. Write metadata additions
 
-Update `custom/{slug}/metadata.yaml` to add:
+Update `output/youtube-adhoc/{slug}/metadata.yaml` to add:
 ```yaml
 custom: true
 ```
@@ -56,32 +56,32 @@ custom: true
 ### 4. Analyze
 
 Execute the analyze-audio skill:
-- `TRANSCRIPT`: `custom/{slug}/02-generated-transcript.md`
-- `OUTPUT`: `custom/{slug}/candidates.yaml`
+- `TRANSCRIPT`: `output/youtube-adhoc/{slug}/02-generated-transcript.md`
+- `OUTPUT`: `output/youtube-adhoc/{slug}/candidates.yaml`
 
 ### 5. Write summary
 
 Execute the write-summary-audio skill:
-- `ITEM_DIRS`: `custom/{slug}/`
-- `OUTPUT`: `custom/{slug}/summary.md`
+- `ITEM_DIRS`: `output/youtube-adhoc/{slug}/`
+- `OUTPUT`: `output/youtube-adhoc/{slug}/summary.md`
 - `MODE`: `single`
 - `TIMESTAMP`: `{TIMESTAMP}` from Setup
 
 ### 6. Due diligence
 
 Execute the due-diligence skill:
-- `SUMMARY`: `custom/{slug}/summary.md`
+- `SUMMARY`: `output/youtube-adhoc/{slug}/summary.md`
 
 ### 7. Generate HTML
 
 Execute the generate-html skill:
-- `SUMMARY`: `custom/{slug}/summary.md`
+- `SUMMARY`: `output/youtube-adhoc/{slug}/summary.md`
 - `CATEGORY`: `audio`
-- `OUTPUT`: `custom/{slug}/summary.html`
+- `OUTPUT`: `output/youtube-adhoc/{slug}/summary.html`
 
 ## Output checklist
 
-- [ ] `custom/{slug}/` directory created
+- [ ] `output/youtube-adhoc/{slug}/` directory created
 - [ ] Ingest files present (`01-input-*`)
 - [ ] `02-generated-transcript.md` generated
 - [ ] `candidates.yaml` written

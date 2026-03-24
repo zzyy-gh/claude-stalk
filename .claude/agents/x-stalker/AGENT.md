@@ -93,17 +93,26 @@ Execute the due-diligence skill:
 
 - `SUMMARY`: `{UPDATE_DIR}/digest.md`
 
-### 8. Generate HTML and export
+### 8. Generate HTML
 
 Execute the generate-html skill:
 
 - `SUMMARY`: `{UPDATE_DIR}/digest.md`
 - `CATEGORY`: `x`
 - `OUTPUT`: `{UPDATE_DIR}/digest.html`
-- `EXPORT_DIR`: from `config.yaml` `export_dir` (if set)
-- `EXPORT_NAME`: `{name} {YYYY-MM-DD}.html`
 
-### 9. Cleanup
+### 9. Verify HTML
+
+Execute the verify-html skill on `{UPDATE_DIR}/digest.md` and `{UPDATE_DIR}/digest.html`. If any critical check fails, regenerate with `python scripts/md-to-html.py`.
+
+### 10. Export (if configured)
+
+If `config.yaml` has `export_dir`:
+- Ensure the directory exists: `mkdir -p "{export_dir}"`
+- Copy: `cp "{UPDATE_DIR}/digest.html" "{export_dir}/{name} {YYYY-MM-DD}.html"`
+- Report the exported file path
+
+### 11. Cleanup
 
 Close headless MCP browser session, even if a prior step failed:
 - `playwright-headless:browser_close`

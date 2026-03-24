@@ -13,7 +13,7 @@ All styles must be inline (`style=""` attributes) for email client compatibility
 - `**Source**: ... | **Guest(s)**: ... | **Published**: ...` metadata → pill spans:
   ```html
   <div style="margin-bottom:12px; font-size:13px;">
-    <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#d0ebff; color:#1864ab;">Source: <a href="..." style="color:#1864ab; text-decoration:none;">name</a></span>
+    <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#d0ebff; color:#1864ab;">Source: <a href="..." style="color:#1971c2; text-decoration:none;">name</a></span>
     <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#fff3bf; color:#e67700;">Guest(s): name</span>
     <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#e6fcf5; color:#087f5b;">Published: date</span>
   </div>

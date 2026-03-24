@@ -46,7 +46,8 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 | Skill | Purpose | Trigger | Input | Output |
 |---|---|---|---|---|
 | **due-diligence** | Flag unverified claims | Called by agent | `SUMMARY` path | Modified in place |
-| **generate-html** | Convert markdown to styled HTML | Called by agent | `SUMMARY`, `CATEGORY` | `.html` file, optional export |
+| **generate-html** | Convert markdown to styled HTML | Called by agent | `SUMMARY`, `CATEGORY` | `.html` file |
+| **verify-html** | Verify HTML against source markdown | Called by agent | Markdown + HTML paths | Pass/fail report |
 | **session-init** | Create new session | `/session-init`, "new session" | Interactive wizard | Session directory with config |
 
 ## Directory Structure
@@ -82,7 +83,7 @@ output/youtube-adhoc/{slug}/      # Ad-hoc runs
 Both pipelines follow the same pattern:
 
 ```
-stalk → [ingest → transcribe →] analyze → write-summary → due-diligence → generate-html
+stalk → [ingest → transcribe →] analyze → write-summary → due-diligence → generate-html → verify-html → [export]
 ```
 
 Audio has extra ingest + transcribe steps because it needs to download and convert media before analysis.

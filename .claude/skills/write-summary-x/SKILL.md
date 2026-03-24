@@ -82,6 +82,7 @@ No filler. Say what happened and what it means.
 - Post-specific claims link to the actual post URL from the scrape/analysis data — never construct or guess URLs.
 - Example: `[Ming-Chi Kuo](https://x.com/mingchikuo) [reports](https://x.com/mingchikuo/status/REAL_ID) that...`
 - Roughly one link per sentence in data-heavy paragraphs.
+- **Do not add due-diligence flags** (italic parentheticals like `_(unverified)_`). Present claims as-is -- the due-diligence skill handles flagging in a separate pipeline step.
 
 **Length**: 2-4 pages equivalent. Substantive enough to be useful, short enough to read
 in 5 minutes.

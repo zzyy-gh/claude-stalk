@@ -7,15 +7,13 @@ forked: true
 
 # Skill: Generate HTML
 
-Convert a markdown summary or digest to styled HTML and optionally export it. Supports multiple content categories via template dispatch.
+Convert a markdown summary or digest to styled HTML. Supports multiple content categories via template dispatch. Export is handled by the calling agent, not this skill.
 
 ## Inputs
 
 - `SUMMARY`: path to the markdown file (e.g., `summary.md` or `digest.md`)
 - `CATEGORY`: content category — `audio` or `x` (determines which template/styles to use)
 - `OUTPUT`: path to write the HTML file
-- `EXPORT_DIR`: (optional) directory to copy HTML with formatted name
-- `EXPORT_NAME`: (optional) filename for export
 
 ## Template Dispatch
 
@@ -42,10 +40,3 @@ python scripts/md-to-html.py \
 ```
 
 The script handles markdown-to-HTML conversion with all inline styles per the styles reference files. The styles `.md` files in `assets/` serve as documentation for the conversion rules hardcoded in the script.
-
-### Export (optional)
-
-If `EXPORT_DIR` is provided:
-- Ensure the output directory exists (create if needed)
-- Copy `OUTPUT` to `{EXPORT_DIR}/{EXPORT_NAME}`
-- Report the exported file path

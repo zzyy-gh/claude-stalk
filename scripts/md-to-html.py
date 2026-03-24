@@ -104,7 +104,8 @@ def _apply_inline_formatting_audio_list(text):
 def _parse_table(lines, category):
     """Parse markdown table lines into HTML."""
     result = []
-    result.append('<table style="width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px;">')
+    margin = '24px' if category == 'x' else '16px'
+    result.append(f'<table style="width:100%; border-collapse:collapse; font-size:14px; margin-bottom:{margin};">')
 
     header_done = False
     for line in lines:
@@ -128,10 +129,16 @@ def _parse_table(lines, category):
             header_done = True
         else:
             result.append('<tr>')
-            for cell in cells:
-                result.append(
-                    f'<td style="padding:8px 12px; color:#495057; border:1px solid #dee2e6;">{_apply_inline_formatting(cell, category)}</td>'
-                )
+            for idx, cell in enumerate(cells):
+                if category == 'x' and idx == 0:
+                    result.append(
+                        f'<td style="background-color:#f1f3f5; padding:8px 12px; font-weight:600; '
+                        f'color:#495057; border:1px solid #dee2e6; width:200px;">{_apply_inline_formatting(cell, category)}</td>'
+                    )
+                else:
+                    result.append(
+                        f'<td style="padding:8px 12px; color:#495057; border:1px solid #dee2e6;">{_apply_inline_formatting(cell, category)}</td>'
+                    )
             result.append('</tr>')
 
     result.append('</table>')
@@ -161,9 +168,10 @@ def _render_metadata_pills(line):
         m = re.search(pattern, line)
         if m:
             value = m.group(1).strip()
+            formatted_value = _apply_inline_formatting(value, 'audio')
             pills.append(
                 f'<span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; '
-                f'font-weight:500; {style}">{label}: {html.escape(value)}</span>'
+                f'font-weight:500; {style}">{label}: {formatted_value}</span>'
             )
     if pills:
         return f'<div style="margin-bottom:12px; font-size:13px;">\n{"".join(pills)}\n</div>'
@@ -195,6 +203,7 @@ def convert_markdown(md_text, category):
     in_card = False
     in_skipped_content = False
     in_what_block = False
+    in_no_new_content = False
 
     def close_list():
         nonlocal in_list
@@ -233,7 +242,7 @@ def convert_markdown(md_text, category):
             if in_list and category == 'audio':
                 close_list()
             if in_what_block:
-                close_what_block()
+                pass  # blank lines are spacing within the block, not terminators
             i += 1
             continue
 
@@ -269,12 +278,14 @@ def convert_markdown(md_text, category):
             close_what_block()
             close_card()
             heading_text = _apply_inline_formatting(m.group(1), category)
+            raw_heading = m.group(1).lower()
             if heading_text.lower().replace('<strong style="color:#1a1a2e;">', '').replace('</strong>', '').strip().lower() == 'skipped content':
                 in_skipped_content = True
-            elif 'skipped content' in m.group(1).lower():
+            elif 'skipped content' in raw_heading:
                 in_skipped_content = True
             else:
                 in_skipped_content = False
+            in_no_new_content = 'no new content' in raw_heading
             output.append(
                 f'<h2 style="font-size:20px; font-weight:600; margin:40px 0 16px 0; '
                 f'color:#1a1a2e; text-transform:uppercase; letter-spacing:0.05em;">'
@@ -331,10 +342,16 @@ def convert_markdown(md_text, category):
             output.append(
                 f'<div style="background-color:#edf2ff; border-left:4px solid #364fc7; '
                 f'padding:16px 20px; margin:24px 0 12px 0; font-size:15px; color:#495057; '
-                f'line-height:1.7;">{content}</div>'
+                f'line-height:1.7;">{content}'
             )
-            # The div is self-contained for single-line blocks; mark closed
-            in_what_block = False
+            # Keep in_what_block = True -- continuation paragraphs will be appended inside
+            i += 1
+            continue
+
+        # Continuation paragraph inside a what block
+        if in_what_block:
+            content = _apply_inline_formatting(stripped, category)
+            output.append(f'<p style="margin:12px 0 0 0;">{content}</p>')
             i += 1
             continue
 
@@ -371,8 +388,8 @@ def convert_markdown(md_text, category):
             i += 1
             continue
 
-        # Audio: "No new content" -- comma-separated channel names
-        if category == 'audio' and not in_card and ',' in stripped and not stripped.startswith('*') and not stripped.startswith('#'):
+        # Audio: "No new content" -- comma-separated channel names (only in that section)
+        if category == 'audio' and in_no_new_content and ',' in stripped and not stripped.startswith('*') and not stripped.startswith('#'):
             # Heuristic: line with comma-separated names, no markdown formatting
             names = [n.strip() for n in stripped.split(',')]
             if all(n and not n.startswith('[') and not n.startswith('*') for n in names):
@@ -398,7 +415,10 @@ def convert_markdown(md_text, category):
 
         # Audio: regular paragraphs (fallback)
         content = _apply_inline_formatting(stripped, category)
-        output.append(f'<p>{content}</p>')
+        output.append(
+            f'<p style="font-size:15px; color:#495057; margin:0 0 12px 0; '
+            f'line-height:1.7;">{content}</p>'
+        )
         i += 1
 
     # Close any open elements

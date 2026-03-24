@@ -103,15 +103,24 @@ Execute the due-diligence skill:
 
 - `SUMMARY`: `{UPDATE_DIR}/summary.md`
 
-### 7. Generate HTML and export
+### 7. Generate HTML
 
 Execute the generate-html skill:
 
 - `SUMMARY`: `{UPDATE_DIR}/summary.md`
 - `CATEGORY`: `audio`
 - `OUTPUT`: `{UPDATE_DIR}/summary.html`
-- `EXPORT_DIR`: from `config.yaml` `output_dir` (if set)
-- `EXPORT_NAME`: `Youtube Updates {TIMESTAMP_PATH}.html`
+
+### 8. Verify HTML
+
+Execute the verify-html skill on `{UPDATE_DIR}/summary.md` and `{UPDATE_DIR}/summary.html`. If any critical check fails, regenerate with `python scripts/md-to-html.py`.
+
+### 9. Export (if configured)
+
+If `config.yaml` has `output_dir`:
+- Ensure the directory exists: `mkdir -p "{output_dir}"`
+- Copy: `cp "{UPDATE_DIR}/summary.html" "{output_dir}/Youtube Updates {TIMESTAMP_PATH}.html"`
+- Report the exported file path
 
 ## Loop integration
 

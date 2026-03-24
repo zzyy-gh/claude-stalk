@@ -42,6 +42,7 @@ For each item, determine **relevance** to VC and AI:
   - For YouTube items: convert each `[HH:MM:SS]` timestamp to total seconds and make the `[MM:SS]` a clickable link: `[MM:SS]({video_url}&t={seconds})`
   - For non-YouTube items (articles): use a plain title link and plain `[MM:SS]` timestamps without deep links
 - When citing specific claims or insights in key moments, reference the nearest `[HH:MM:SS]` marker from the transcript
+- **Do not add due-diligence flags** (italic parentheticals like `_(unverified)_`). Present claims as-is -- the due-diligence skill handles flagging in a separate pipeline step
 - **Link all source/channel names** to their YouTube channel page: `[{source_name}](https://www.youtube.com/@{handle})`
 - **Link all item titles** to their video URL — including in Skipped and Not transcribed tables
 - **What happened** block (after Overview): 2-3 sentences synthesizing dominant stories and common threads across relevant items — market shifts, emerging consensus, contrarian takes (may split into paragraphs when topics are distinct)
@@ -57,6 +58,6 @@ For each item, determine **relevance** to VC and AI:
 
 ### Single mode (`MODE: single`)
 
-- Heading: `# VC/AI Briefing -- {slug}` (not a date)
+- Heading: `# VC/AI Briefing -- {title}` (use the video title, not the slug)
 - No executive summary paragraph for the item — the "What happened" block in the overview serves this purpose
 - No "Skipped", "Not transcribed", "No new content" sections — this is a single-item summary

@@ -79,6 +79,10 @@ Execute the generate-html skill:
 - `CATEGORY`: `audio`
 - `OUTPUT`: `output/youtube-adhoc/{slug}/summary.html`
 
+### 8. Verify HTML
+
+Execute the verify-html skill on `output/youtube-adhoc/{slug}/summary.md` and `output/youtube-adhoc/{slug}/summary.html`. If any critical check fails, regenerate with `python scripts/md-to-html.py`.
+
 ## Output checklist
 
 - [ ] `output/youtube-adhoc/{slug}/` directory created

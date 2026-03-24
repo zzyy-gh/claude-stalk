@@ -6,8 +6,8 @@ Unified content monitoring and intelligence platform. Monitors YouTube channels,
 
 | Category | Directory | Sources | Agent |
 |----------|-----------|---------|-------|
-| **Podcast** | `podcast/` | YouTube channels, RSS feeds | `podcast` |
-| **Social Media** | `social-media/` | X lists, X Following feed | `social-media` |
+| **Youtuber** | `output/youtuber/` | YouTube channels, RSS feeds | `youtuber` |
+| **Xmen** | `output/xmen/` | X lists, X Following feed | `xmen` |
 
 ## Agents
 
@@ -15,8 +15,8 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 
 | Agent | Purpose | Trigger |
 |---|---|---|
-| **podcast** | Full podcast pipeline: stalk, ingest, transcribe, analyze, summarize | "run update", "check all", "scheduled check" |
-| **social-media** | X digest pipeline: scrape, analyze, summarize | "run digest", "digest my feed", "run x digest" |
+| **youtuber** | Full YouTube/audio pipeline: stalk, ingest, transcribe, analyze, summarize | "run update", "check all", "scheduled check" |
+| **xmen** | X digest pipeline: scrape, analyze, summarize | "run digest", "digest my feed", "run x digest" |
 | **adhoc** | Ad-hoc processing of a single URL | "summarize this", "summarize this video" |
 | **tester** | Quality checks on workspace (docs, scripts, configs) | "test", "verify", "run checks" |
 
@@ -51,7 +51,7 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 ## Directory Structure
 
 ```
-podcast/{name}/
+output/youtuber/{name}/
 ├── config.yaml
 ├── stalk-history.yaml
 ├── retry.yaml
@@ -64,7 +64,7 @@ podcast/{name}/
         ├── summary.md
         └── summary.html
 
-social-media/{name}/
+output/xmen/{name}/
 ├── config.yaml
 └── updates/
     └── YYYY-MM-DD/
@@ -106,5 +106,5 @@ All scripts live in `scripts/`:
 
 - Read the skill/agent file before executing a stage
 - Slug format: `short-descriptive-name` (lowercase, hyphenated). Use `bash scripts/slugify.sh "$title"` for canonical slugification.
-- Update folder format: `YYYY-MM-DD-HHMM-TZ` (podcast) or `YYYY-MM-DD` (social media)
+- Update folder format: `YYYY-MM-DD-HHMM-TZ` (youtuber) or `YYYY-MM-DD` (xmen)
 - Timestamps: always use local timezone. Agents capture the full timestamp with timezone once at the start of a run via `bash scripts/get-timestamp.sh` (line 1 = display format, line 2 = path-safe format). Skills never run `date` — they use the agent-provided timestamp.

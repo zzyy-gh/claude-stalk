@@ -115,12 +115,12 @@ Run all checks from Mode 1 (docs) and Mode 2 (scripts), then additionally:
 
 ### Config integrity
 
-1. **Podcast sessions** — scan all `podcast/*/config.yaml`:
+1. **Youtuber sessions** — scan all `output/youtuber/*/config.yaml`:
    - Valid YAML with required fields: `name`, `enabled`, `sources`
    - Each source has `type`, `id` (YouTube) or `url` (RSS), and `name`
    - `stalk-history.yaml` and `retry.yaml` exist
 
-2. **Social media sessions** — scan all `social-media/*/config.yaml`:
+2. **Xmen sessions** — scan all `output/xmen/*/config.yaml`:
    - Valid YAML with required fields: `name`, `enabled`, `source`
    - `account` field present (or defaults to "main")
 
@@ -137,10 +137,10 @@ Append to the docs + scripts report:
 ```
 ## Config Integrity
 
-### Podcast Sessions
+### Youtuber Sessions
 - X sessions checked, Y issues
 
-### Social Media Sessions
+### Xmen Sessions
 - X sessions checked, Y issues
 
 ### HTML Templates

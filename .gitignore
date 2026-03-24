@@ -1,7 +1,7 @@
 # Session data
-podcast/**/stalk-history.yaml
-podcast/**/updates/
-social-media/**/updates/
+output/youtuber/**/stalk-history.yaml
+output/youtuber/**/updates/
+output/xmen/**/updates/
 
 # Ad-hoc runs
 custom/

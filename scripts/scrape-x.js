@@ -103,7 +103,7 @@ async function main() {
   // Step 3: Navigate to feed
   const page = session.page || context.pages()[0] || await context.newPage();
   try {
-    await navigateToFeed(page, source);
+    var navMeta = await navigateToFeed(page, source);
   } catch (e) {
     await context.close();
     output({ startTime, endTime: Date.now(), stats: null, error: e.message });
@@ -186,7 +186,7 @@ async function main() {
 
   const endTime = Date.now();
   await context.close();
-  output({ startTime, endTime, stats: { totalPosts, totalAccounts, hitCutoff }, error });
+  output({ startTime, endTime, stats: { totalPosts, totalAccounts, hitCutoff, listMembers: navMeta?.listMembers ?? null }, error });
   process.exit(error ? 1 : 0);
 }
 

@@ -92,8 +92,8 @@ Audio has extra ingest + transcribe steps because it needs to download and conve
 
 All scripts live in `scripts/`:
 - **Shared**: `get-timestamp.sh`, `slugify.sh`, `notify-telegram.sh`, `md-to-html.py`
-- **Audio**: `stalk-youtube.sh`, `batch-check-metadata.sh`, `filter-stalk.py`, `parse-feed.py`, `ingest-youtube.sh`, `vtt-to-transcript.py`
-- **X**: `scrape-x.js`, `now.js`, `verify-x-urls.py`, `lib/` (auth, extract, navigate)
+- **Audio**: `stalk-youtube.sh`, `batch-check-metadata.sh`, `build-candidates.py`, `filter-stalk.py`, `parse-feed.py`, `ingest-youtube.sh`, `vtt-to-transcript.py`
+- **X**: `scrape-x.js`, `now.js`, `verify-x-urls.py`, `summarize-scrape.py`, `lib/` (auth, extract, navigate)
 - **Tests**: `tests/`
 
 ## Environment

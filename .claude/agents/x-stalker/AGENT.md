@@ -85,7 +85,7 @@ Read `.claude/skills/write-summary-x/SKILL.md` and execute it:
 
 - `UPDATE_DIR`: the update directory
 - Config values: `name`, `prompt`
-- Scrape timing: `startTime` and `endTime` from stalk-x output
+- Scrape timing: `startTime`, `endTime`, and `listMembers` from stalk-x output
 
 ### 7. Due diligence
 

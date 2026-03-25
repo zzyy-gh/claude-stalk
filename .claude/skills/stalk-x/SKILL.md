@@ -55,14 +55,16 @@ The script handles everything internally:
 The script prints a single JSON line to stdout:
 
 ```json
-{"startTime":1711180800000,"endTime":1711184400000,"stats":{"totalPosts":286,"totalAccounts":24,"hitCutoff":true},"error":null}
+{"startTime":1711180800000,"endTime":1711184400000,"stats":{"totalPosts":286,"totalAccounts":24,"hitCutoff":true,"listMembers":150},"error":null}
 ```
+
+- `listMembers` is the total number of members in the X list (extracted from the list page header). `null` for following feeds or if extraction fails.
 
 Human-readable messages (login prompts, progress) go to stderr.
 
 ### Step 2 — Record timing
 
-Parse the stdout JSON and save `startTime` and `endTime` for downstream use.
+Parse the stdout JSON and save `startTime`, `endTime`, and `listMembers` for downstream use.
 
 ---
 
@@ -71,7 +73,7 @@ Parse the stdout JSON and save `startTime` and `endTime` for downstream use.
 This skill produces:
 
 - **`{UPDATE_DIR}/scrape.json`** — file keyed by handle, each value an array of post objects with: `text`, `time`, `url`, `displayName`, `externalLinks`, `images`, `metrics`
-- **Scrape timing** — `startTime` and `endTime` timestamps (from stdout JSON)
+- **Scrape timing** — `startTime`, `endTime`, and `listMembers` (from stdout JSON)
 
 ---
 

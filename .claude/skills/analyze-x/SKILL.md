@@ -27,6 +27,8 @@ Load this file at the start. Do NOT expect posts to be passed through conversati
 
 ## Triage: deciding what to investigate
 
+Use `python scripts/summarize-scrape.py --scrape "{UPDATE_DIR}/scrape.json" --stats` for aggregate counts, and `--links` for a sorted list of posts with external links. For full post triage, read scrape.json directly.
+
 Look at the full set of scraped posts and their external links/images. Prioritize
 based on these signals (weigh them together, not as a checklist):
 

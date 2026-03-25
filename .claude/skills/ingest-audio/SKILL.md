@@ -13,7 +13,7 @@ Collect raw source material into a target directory. **Do not transform or extra
 
 - A URL to ingest
 - A target directory path (the item's subfolder within an update)
-- `{TIMESTAMP}` provided by the calling agent (e.g., `2026-03-20 00:21 CST`). Use it for `date_processed` and `stages.ingest.timestamp`. Do not run `date` independently.
+- `{TIMESTAMP}` provided by the calling agent (e.g., `2026-03-20 00:21 CST`). Use it for `date_processed`. Do not run `date` independently.
 
 ## Steps
 
@@ -60,9 +60,6 @@ speakers: []
 tags: []
 duration: "1:23:45"
 language: "en"
-stages:
-  ingest: { completed: true, timestamp: "2026-03-11 14:30 CST" }
-  transcribe: { completed: false }
 ```
 
 ### Field sources
@@ -85,4 +82,3 @@ stages:
 - [ ] Target directory exists
 - [ ] All source material saved as `01-input-*` files
 - [ ] `metadata.yaml` written with all available fields
-- [ ] `stages.ingest.completed` set to `true`

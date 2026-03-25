@@ -115,12 +115,12 @@ Run all checks from Mode 1 (docs) and Mode 2 (scripts), then additionally:
 
 ### Config integrity
 
-1. **YouTube Stalker sessions** — scan all `output/youtube-stalker/*/config.yaml`:
+1. **YouTube Stalker sessions** — scan all `output/youtube-digest/*/config.yaml`:
    - Valid YAML with required fields: `name`, `enabled`, `sources`
    - Each source has `type`, `id` (YouTube) or `url` (RSS), and `name`
    - `stalk-history.yaml` and `retry.yaml` exist
 
-2. **X Stalker sessions** — scan all `output/x-stalker/*/config.yaml`:
+2. **X Stalker sessions** — scan all `output/x-digest/*/config.yaml`:
    - Valid YAML with required fields: `name`, `enabled`, `source`
    - `account` field present (or defaults to "main")
 

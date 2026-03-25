@@ -1,6 +1,6 @@
 ---
 name: session-init
-description: "Create a new monitoring session. Trigger: 'create session', 'new session', 'add session', 'session-init'. Supports youtube-stalker (audio) and x-stalker (X) session types."
+description: "Create a new monitoring session. Trigger: 'create session', 'new session', 'add session', 'session-init'. Supports youtube-digest (audio) and x-digest (X) session types."
 version: "2.0"
 ---
 
@@ -11,8 +11,8 @@ Interactive wizard to create a new monitoring session for any supported content 
 ## Steps
 
 1. **Ask for category**:
-   - `youtube-stalker` — YouTube channels and RSS feeds (audio/video content)
-   - `x-stalker` — X (Twitter) lists or Following feed
+   - `youtube-digest` — YouTube channels and RSS feeds (audio/video content)
+   - `x-digest` — X (Twitter) lists or Following feed
    - Future: `website` — web monitoring
 
 2. **Ask for session name**:
@@ -54,7 +54,7 @@ Ask for sources (one at a time, loop until user says done):
 
 ### YouTube Stalker
 ```bash
-mkdir -p output/youtube-stalker/{name}/updates
+mkdir -p output/youtube-digest/{name}/updates
 ```
 Use template: `.claude/skills/session-init/assets/config-template-audio.yaml`
 
@@ -62,7 +62,7 @@ Write `stalk-history.yaml` and `retry.yaml` as `[]`.
 
 ### X Stalker
 ```bash
-mkdir -p output/x-stalker/{name}/updates
+mkdir -p output/x-digest/{name}/updates
 ```
 Use template: `.claude/skills/session-init/assets/config-template-x.yaml`
 

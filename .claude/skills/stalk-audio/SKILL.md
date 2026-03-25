@@ -11,9 +11,9 @@ Check configured sources for new content using a datetime-aware algorithm. Retur
 
 ## Inputs
 
-- A session directory or session name (folder under `output/youtube-stalker/`)
-- Reads `output/youtube-stalker/{name}/config.yaml` for source list
-- Reads `output/youtube-stalker/{name}/stalk-history.yaml` for already-seen items and watermarks
+- A session directory or session name (folder under `output/youtube-digest/`)
+- Reads `output/youtube-digest/{name}/config.yaml` for source list
+- Reads `output/youtube-digest/{name}/stalk-history.yaml` for already-seen items and watermarks
 
 ## Algorithm Overview
 
@@ -25,48 +25,24 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
 
 ## Steps
 
-1. **Load config**: Read `output/youtube-stalker/{name}/config.yaml` to get the `sources` list.
+1. **Load config**: Read `output/youtube-digest/{name}/config.yaml` to get the `sources` list.
 
-2. **Load stalk history**: Confirm `output/youtube-stalker/{name}/stalk-history.yaml` exists (or will be created). No manual parsing needed — `filter-stalk.py` handles watermark extraction and URL dedup internally.
+2. **Load stalk history**: Confirm `output/youtube-digest/{name}/stalk-history.yaml` exists (or will be created). No manual parsing needed — `filter-stalk.py` handles watermark extraction and URL dedup internally.
 
-3. **Fetch each source**:
-
-### YouTube channel
-
-- Fetch the latest videos:
-  ```bash
-  bash scripts/stalk-youtube.sh "{handle}" 15
-  ```
-- Output is tab-delimited, one line per video: `videoId\ttitle\tupload_date_YYYYMMDD`
-- `upload_date` may be empty (flat-playlist returns it inconsistently)
-- Convert `upload_date` to ISO 8601 (e.g., `20260310` → `2026-03-10T00:00:00Z`)
-- Build item: `url` as `https://www.youtube.com/watch?v={videoId}`, `title`, `published`
-- Set `source_type: youtube`
-- Set `source_name` from the config entry's `name` field
-
-### RSS/Atom feed
-- Fetch the feed URL using WebFetch, save content to a temp file (e.g., `/tmp/feed-{source_name}.xml`)
-- Parse with the feed parser script:
-  ```bash
-  python scripts/parse-feed.py --source-name "{name}" --file /tmp/feed-{source_name}.xml
-  ```
-- Output is YAML list of items with `url`, `title`, `source_name`, `source_type: rss`, and optionally `published`, `description`
-- Append the output items to the candidates list
-
-4. **Write candidates file**: Save all fetched items from step 3 to a temporary YAML file (e.g., `/tmp/stalk-candidates-{timestamp}.yaml`):
-   ```yaml
-   - url: "https://..."
-     title: "Video Title"
-     source_name: "Channel Name"
-     source_type: youtube
-     published: "2026-03-10T14:00:00Z"
+3. **Fetch all sources + build candidates file** (single script):
+   ```bash
+   python scripts/build-candidates.py \
+     --config "output/youtube-digest/{name}/config.yaml" \
+     --output /tmp/stalk-candidates-{timestamp}.yaml
    ```
-   - `published` is optional (omit if unavailable)
+   - Reads `config.yaml`, fetches all YouTube channels (via `stalk-youtube.sh`) and RSS feeds (via `parse-feed.py`) in parallel
+   - Writes combined candidates YAML to the output path
+   - Progress and errors are printed to stderr
 
-5. **Filter + seed** (via script):
+4. **Filter + seed** (via script):
    ```bash
    python scripts/filter-stalk.py \
-     --history "output/youtube-stalker/{name}/stalk-history.yaml" \
+     --history "output/youtube-digest/{name}/stalk-history.yaml" \
      --candidates /tmp/stalk-candidates-{timestamp}.yaml \
      --now "{TIMESTAMP}"
    ```
@@ -74,8 +50,8 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
    - Output is YAML with three keys: `new_items`, `history_additions`, `seed_reports`
    - Save the output to a file or parse it directly
 
-6. **Metadata + duration check** (YouTube items only):
-   - Run only on `new_items` from step 5. Skip if zero candidates remain.
+5. **Metadata + duration check** (YouTube items only):
+   - Run only on `new_items` from step 4. Skip if zero candidates remain.
    - Batch-fetch dates and durations:
      ```bash
      bash scripts/batch-check-metadata.sh id1 id2 id3 ...
@@ -84,12 +60,12 @@ The stalk algorithm is **datetime-aware**: it tracks the latest `published` date
    - Use `upload_date` for watermark filtering if not already available from step 3
    - If `duration <= 60` seconds or empty: mark as `short: true` on the corresponding `history_additions` entry and **remove from new_items**
 
-7. **Write stalk history**: Append `history_additions` from step 5 (with any `short` flags from step 6) to `output/youtube-stalker/{name}/stalk-history.yaml`
+6. **Write stalk history**: Append `history_additions` from step 4 (with any `short` flags from step 5) to `output/youtube-digest/{name}/stalk-history.yaml`
    - Each entry has: `url`, `title`, `source_name`, `source_type`, `first_seen`, and optionally `published` and `short`
 
-8. **Print seed reports**: Print any messages from `seed_reports` (e.g., "Seed: Lex Fridman -- recorded 5 items, latest: 2026-03-10T14:00:00Z")
+7. **Print seed reports**: Print any messages from `seed_reports` (e.g., "Seed: Lex Fridman -- recorded 5 items, latest: 2026-03-10T14:00:00Z")
 
-9. **Return** structured list of new items (excludes shorts):
+8. **Return** structured list of new items (excludes shorts):
 
 ```yaml
 new_items:

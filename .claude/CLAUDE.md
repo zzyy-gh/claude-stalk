@@ -6,8 +6,8 @@ Unified content monitoring and intelligence platform. Monitors YouTube channels,
 
 | Category | Directory | Sources | Agent |
 |----------|-----------|---------|-------|
-| **YouTube Stalker** | `output/youtube-stalker/` | YouTube channels, RSS feeds | `youtube-stalker` |
-| **X Stalker** | `output/x-stalker/` | X lists, X Following feed | `x-stalker` |
+| **YouTube Stalker** | `output/youtube-digest/` | YouTube channels, RSS feeds | `youtube-digest` |
+| **X Stalker** | `output/x-digest/` | X lists, X Following feed | `x-digest` |
 | **YouTube Adhoc** | `output/youtube-adhoc/` | Single YouTube URLs | `youtube-adhoc` |
 
 ## Agents
@@ -16,8 +16,8 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 
 | Agent | Purpose | Trigger |
 |---|---|---|
-| **youtube-stalker** | Full YouTube/audio pipeline: stalk, ingest, transcribe, analyze, summarize | "run update", "check all", "scheduled check" |
-| **x-stalker** | X digest pipeline: scrape, analyze, summarize | "run digest", "digest my feed", "run x digest" |
+| **youtube-digest** | Full YouTube/audio pipeline: stalk, ingest, transcribe, analyze, summarize | "run update", "check all", "scheduled check" |
+| **x-digest** | X digest pipeline: scrape, analyze, summarize | "run digest", "digest my feed", "run x digest" |
 | **youtube-adhoc** | Ad-hoc processing of a single YouTube URL | "summarize this", "summarize this video" |
 | **tester** | Quality checks on workspace (docs, scripts, configs) | "test", "verify", "run checks" |
 
@@ -53,7 +53,7 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 ## Directory Structure
 
 ```
-output/youtube-stalker/{name}/
+output/youtube-digest/{name}/
 ├── config.yaml
 ├── stalk-history.yaml
 ├── retry.yaml
@@ -66,7 +66,7 @@ output/youtube-stalker/{name}/
         ├── summary.md
         └── summary.html
 
-output/x-stalker/{name}/
+output/x-digest/{name}/
 ├── config.yaml
 └── updates/
     └── YYYY-MM-DD/
@@ -108,5 +108,5 @@ All scripts live in `scripts/`:
 
 - Read the skill/agent file before executing a stage
 - Slug format: `short-descriptive-name` (lowercase, hyphenated). Use `bash scripts/slugify.sh "$title"` for canonical slugification.
-- Update folder format: `YYYY-MM-DD-HHMM-TZ` (youtube-stalker) or `YYYY-MM-DD` (x-stalker)
+- Update folder format: `YYYY-MM-DD-HHMM-TZ` (youtube-digest) or `YYYY-MM-DD` (x-digest)
 - Timestamps: always use local timezone. Agents capture the full timestamp with timezone once at the start of a run via `bash scripts/get-timestamp.sh` (line 1 = display format, line 2 = path-safe format). Skills never run `date` — they use the agent-provided timestamp.

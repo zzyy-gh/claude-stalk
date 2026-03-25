@@ -62,9 +62,6 @@ The output is `02-generated-transcript.md` — the single source of truth for do
      ```
    - For web content: clean readable prose organized into paragraphs (no timestamps)
 
-4. **Update `metadata.yaml`**:
-   - Set `stages.transcribe` to `{ completed: true, timestamp: "{TIMESTAMP}" }`
-
 ## Quality checks
 
 - Timestamps appear only at paragraph starts as `[HH:MM:SS]`
@@ -80,11 +77,10 @@ The output is `02-generated-transcript.md` — the single source of truth for do
 - **Multiple languages**: Note in metadata; transcribe the primary language
 - **Very long content (>2hrs)**: Still produce the full transcript, do not truncate
 - **No usable input**: Update metadata with an error note and stop
-- **Retry**: When retrying a previously failed transcription, re-check for captions first — they may now be available. Prefer captions over audio if found. On success, the caller handles `retry.yaml` cleanup and `metadata.yaml` updates
+- **Retry**: When retrying a previously failed transcription, re-check for captions first — they may now be available. Prefer captions over audio if found. If the method changed, update `transcript_source` in `metadata.yaml`. On success, the caller handles `retry.yaml` cleanup
 
 ## Output checklist
 
 - [ ] `02-generated-transcript.md` written
 - [ ] Timestamped paragraphs with `[HH:MM:SS]` markers (audio/video sources)
 - [ ] Speaker labels if identifiable
-- [ ] `metadata.yaml` updated with transcribe stage completion

@@ -1,6 +1,6 @@
 # Session data
-output/youtube-stalker/**/updates/
-output/x-stalker/**/updates/
+output/youtube-digest/**/updates/
+output/x-digest/**/updates/
 
 # Ad-hoc runs
 output/youtube-adhoc/

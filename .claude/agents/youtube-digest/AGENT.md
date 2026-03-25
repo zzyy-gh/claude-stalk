@@ -1,6 +1,6 @@
 ---
-name: youtube-stalker
-description: "Full YouTube/audio pipeline: checks feeds, ingests, transcribes, and produces summaries. Trigger: 'run update', 'check all', 'scheduled check', 'run youtube-stalker'."
+name: youtube-digest
+description: "Full YouTube/audio pipeline: checks feeds, ingests, transcribes, and produces summaries. Trigger: 'run update', 'check all', 'scheduled check', 'run youtube-digest'."
 version: "1.0"
 ---
 
@@ -10,7 +10,7 @@ Full pipeline orchestrator for YouTube/audio content. Checks feeds, ingests new 
 
 ## Inputs
 
-- `SESSION`: session name or `all` (default: all enabled sessions under `output/youtube-stalker/`)
+- `SESSION`: session name or `all` (default: all enabled sessions under `output/youtube-digest/`)
 
 ### Setup
 
@@ -23,13 +23,13 @@ Do not guess or infer the time from other sources -- always check the real clock
 ## Multi-session orchestration
 
 When `SESSION` is `all` (or omitted):
-- List all `output/youtube-stalker/*/config.yaml`
+- List all `output/youtube-digest/*/config.yaml`
 - Filter to `enabled: true`
 - Run the pipeline below for each enabled session
 - Print final summary across sessions
 
 When `SESSION` is a specific name:
-- Run the pipeline for `output/youtube-stalker/{SESSION}/` only
+- Run the pipeline for `output/youtube-digest/{SESSION}/` only
 
 ## Notification
 
@@ -40,7 +40,7 @@ Always send Telegram notifications at these points:
 
 ## Pipeline (per session)
 
-`SESSION_DIR` = `output/youtube-stalker/{name}/`
+`SESSION_DIR` = `output/youtube-digest/{name}/`
 
 ### 0. Check for pending retries
 
@@ -48,10 +48,12 @@ Always send Telegram notifications at these points:
 - Filter entries where `enabled: true`
 - For each enabled entry:
   - Resolve `path` relative to `SESSION_DIR` (e.g., `updates/2026-03-17-1309/travis-kalanick-michael-dell-austin`)
-  - Read `.claude/skills/transcribe-audio/SKILL.md` and execute it on that directory
+  - **Inspect what exists** in the item directory to decide where to resume:
+    - No `01-input-*` files → re-run ingest-audio skill, then transcribe-audio skill
+    - Has `01-input-*` but no `02-generated-transcript.md` → re-run transcribe-audio skill only
+    - Has `02-generated-transcript.md` → already done, just remove from retry
   - **On success**:
     - Remove the entry from `retry.yaml`
-    - Update the item's `metadata.yaml`: set `stages.transcribe.completed: true`, `stages.transcribe.timestamp` to now, and update `transcript_source` if the method changed
     - Add the item to a `retried_items` list for inclusion in the summary
   - **On failure**:
     - Ask the user (via Telegram notification + direct question) whether to keep retrying or stop
@@ -80,6 +82,13 @@ All items can run in parallel. For each item:
    - URL: the item's `url`
    - Target directory: `{UPDATE_DIR}/{slug}/`
 3. **Transcribe**: Execute the transcribe-audio skill on `{UPDATE_DIR}/{slug}/`
+4. **On failure** (ingest or transcribe): the main agent adds the item to `{SESSION_DIR}/retry.yaml`:
+   ```yaml
+   - path: "updates/{TIMESTAMP_PATH}/{slug}"
+     enabled: true
+     reason: "Brief description of failure"
+   ```
+   Continue with remaining items -- do not stop the batch.
 
 ### 4. Analyze (one per item, parallel)
 

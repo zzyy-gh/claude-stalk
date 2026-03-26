@@ -305,5 +305,92 @@ class TestEndToEnd(unittest.TestCase):
                     os.unlink(p)
 
 
+class TestWebpageCategory(unittest.TestCase):
+    """Test webpage-specific conversion."""
+
+    def test_h3_card_wrapper(self):
+        md = "### [Article Title](https://example.com/post)"
+        result = convert_markdown(md, "webpage")
+        self.assertIn('background-color:#f8f9fa', result)
+        self.assertIn('border:1px solid #dee2e6', result)
+        self.assertIn('Article Title', result)
+        self.assertIn('href="https://example.com/post"', result)
+
+    def test_source_only_metadata_pill(self):
+        md = '**Source**: [Anthropic Blog](https://blog.anthropic.com)'
+        result = convert_markdown(md, "webpage")
+        self.assertIn('background-color:#d0ebff', result)
+        self.assertIn('Source:', result)
+        self.assertIn('Anthropic Blog', result)
+        # Should NOT have a Published pill
+        self.assertNotIn('Published:', result)
+
+    def test_source_with_guest_pill(self):
+        md = '**Source**: [OpenAI Blog](https://openai.com) | **Guest(s)**: Sam Altman, CEO'
+        result = convert_markdown(md, "webpage")
+        self.assertIn('background-color:#d0ebff', result)
+        self.assertIn('background-color:#fff3bf', result)
+        self.assertIn('Guest(s):', result)
+        self.assertIn('Sam Altman, CEO', result)
+
+    def test_body_paragraph_inside_card(self):
+        md = (
+            "### [Title](https://example.com)\n"
+            "**Source**: [Blog](https://blog.com)\n\n"
+            "This is a summary paragraph inside the card."
+        )
+        result = convert_markdown(md, "webpage")
+        # Card wrapper
+        self.assertIn('background-color:#f8f9fa', result)
+        # Paragraph inside card
+        self.assertIn('<p style="font-size:15px;', result)
+        self.assertIn('summary paragraph inside the card', result)
+
+    def test_body_paragraph_outside_card(self):
+        md = "This is a standalone paragraph not inside any card."
+        result = convert_markdown(md, "webpage")
+        self.assertIn('<p style="font-size:15px;', result)
+        self.assertIn('standalone paragraph', result)
+
+    def test_paywall_flag(self):
+        md = "Summary text. _(paywalled -- summary based on publicly available portion)_"
+        result = convert_markdown(md, "webpage")
+        self.assertIn('color:#e67700', result)
+        self.assertIn('paywalled', result)
+
+    def test_no_timestamp_links(self):
+        md = (
+            "### [Article](https://example.com)\n"
+            "**Source**: [Blog](https://blog.com)\n\n"
+            "No timestamps in webpage summaries."
+        )
+        result = convert_markdown(md, "webpage")
+        self.assertNotIn('font-family:Courier New', result)
+
+    def test_what_happened_block(self):
+        md = "**What happened:** AI models got better this week."
+        result = convert_markdown(md, "webpage")
+        self.assertIn('background-color:#edf2ff', result)
+        self.assertIn('AI models got better', result)
+
+    def test_skipped_table(self):
+        md = (
+            "## Skipped\n\n"
+            "| Title | Source | Reason |\n"
+            "|-------|--------|--------|\n"
+            "| [Post](https://x.com) | [Blog](https://b.com) | Not relevant |\n"
+        )
+        result = convert_markdown(md, "webpage")
+        self.assertIn('<table', result)
+        self.assertIn('Not relevant', result)
+
+    def test_source_only_not_detected_as_audio_metadata(self):
+        """Source-only line should NOT be detected when category is audio."""
+        md = '**Source**: [Blog](https://blog.com)'
+        result = convert_markdown(md, "audio")
+        # Audio requires both Source AND Published, so this falls through to paragraph
+        self.assertNotIn('background-color:#d0ebff', result)
+
+
 if __name__ == '__main__':
     unittest.main()

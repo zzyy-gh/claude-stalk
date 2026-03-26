@@ -156,19 +156,21 @@ _PILL_PATTERNS = [
 ]
 
 
-def _is_metadata_line(line):
+def _is_metadata_line(line, category='audio'):
     """Check if line is a metadata pill line."""
+    if category == 'webpage':
+        return '**Source**:' in line and '**Published**:' not in line
     return '**Source**:' in line and '**Published**:' in line
 
 
-def _render_metadata_pills(line):
+def _render_metadata_pills(line, category='audio'):
     """Render metadata pills from a line like **Source**: ... | **Guest(s)**: ... | **Published**: ..."""
     pills = []
     for pattern, style, label in _PILL_PATTERNS:
         m = re.search(pattern, line)
         if m:
             value = m.group(1).strip()
-            formatted_value = _apply_inline_formatting(value, 'audio')
+            formatted_value = _apply_inline_formatting(value, category)
             pills.append(
                 f'<span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; '
                 f'font-weight:500; {style}">{label}: {formatted_value}</span>'
@@ -300,7 +302,7 @@ def convert_markdown(md_text, category):
             close_what_block()
             h3_content = m.group(1)
 
-            if category == 'audio':
+            if category in ('audio', 'webpage'):
                 close_card()
                 in_card = True
                 output.append(
@@ -355,9 +357,9 @@ def convert_markdown(md_text, category):
             i += 1
             continue
 
-        # Audio: metadata pills
-        if category == 'audio' and _is_metadata_line(stripped):
-            output.append(_render_metadata_pills(stripped))
+        # Audio/Webpage: metadata pills
+        if category in ('audio', 'webpage') and _is_metadata_line(stripped, category):
+            output.append(_render_metadata_pills(stripped, category))
             i += 1
             continue
 
@@ -403,8 +405,8 @@ def convert_markdown(md_text, category):
                 i += 1
                 continue
 
-        # X: body paragraphs
-        if category == 'x':
+        # X/Webpage: body paragraphs (outside cards)
+        if category in ('x', 'webpage') and not in_card:
             content = _apply_inline_formatting(stripped, category)
             output.append(
                 f'<p style="font-size:15px; color:#495057; margin:0 0 12px 0; '
@@ -440,7 +442,7 @@ def main():
     parser = argparse.ArgumentParser(description='Convert markdown to styled HTML with inline styles.')
     parser.add_argument('--input', required=True, help='Input markdown file')
     parser.add_argument('--template', required=True, help='HTML template file with {content} placeholder')
-    parser.add_argument('--category', required=True, choices=['audio', 'x'], help='Content category')
+    parser.add_argument('--category', required=True, choices=['audio', 'x', 'webpage'], help='Content category')
     parser.add_argument('--output', required=True, help='Output HTML file')
 
     args = parser.parse_args()

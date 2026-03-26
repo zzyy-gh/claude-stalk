@@ -13,11 +13,24 @@ Exit codes: 0 = success, 1 = bad args, 2 = file error
 """
 
 import argparse
+import os
 import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 
 import yaml
+
+# Lazy import — only used when --normalize-urls is set
+_normalize_url = None
+
+
+def _get_normalizer():
+    global _normalize_url
+    if _normalize_url is None:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from normalize_url import normalize_url
+        _normalize_url = normalize_url
+    return _normalize_url
 
 
 SEED_LIMIT = 5
@@ -52,14 +65,14 @@ def load_yaml(path):
         return []
 
 
-def build_watermarks(history):
+def build_watermarks(history, normalizer=None):
     """Build per-source watermark (max published) and a set of all URLs."""
     watermarks = {}
     urls = set()
     for entry in history:
         url = entry.get("url")
         if url:
-            urls.add(url)
+            urls.add(normalizer(url) if normalizer else url)
         source = entry.get("source_name")
         pub = parse_dt(entry.get("published"))
         if source and pub:
@@ -73,9 +86,9 @@ def sources_in_history(history):
     return {e.get("source_name") for e in history if e.get("source_name")}
 
 
-def filter_candidates(history, candidates, now_str):
+def filter_candidates(history, candidates, now_str, normalizer=None):
     """Core filtering logic. Returns (new_items, history_additions, seed_reports)."""
-    watermarks, seen_urls = build_watermarks(history)
+    watermarks, seen_urls = build_watermarks(history, normalizer)
     known_sources = sources_in_history(history)
 
     # Group candidates by source_name
@@ -121,9 +134,10 @@ def filter_candidates(history, candidates, now_str):
 
         for item in items:
             url = item.get("url")
+            compare_url = normalizer(url) if normalizer and url else url
 
             # URL safety net: skip anything already in history
-            if url in seen_urls:
+            if compare_url in seen_urls:
                 continue
 
             pub = parse_dt(item.get("published"))
@@ -151,7 +165,7 @@ def filter_candidates(history, candidates, now_str):
 
             new_items.append(entry)
             history_additions.append(dict(entry))
-            seen_urls.add(url)  # prevent duplicates within this run
+            seen_urls.add(compare_url)  # prevent duplicates within this run
 
     return new_items, history_additions, seed_reports
 
@@ -161,7 +175,11 @@ def main():
     parser.add_argument("--history", required=True, help="Path to stalk-history.yaml")
     parser.add_argument("--candidates", required=True, help="Path to candidates YAML file")
     parser.add_argument("--now", required=True, help="Current ISO 8601 timestamp for first_seen")
+    parser.add_argument("--normalize-urls", action="store_true", default=False,
+                        help="Normalize URLs before dedup comparison (for webpage sources)")
     args = parser.parse_args()
+
+    normalizer = _get_normalizer() if args.normalize_urls else None
 
     history = load_yaml(args.history)
     candidates = load_yaml(args.candidates)
@@ -171,7 +189,7 @@ def main():
                   default_flow_style=False, sort_keys=False)
         return
 
-    new_items, history_additions, seed_reports = filter_candidates(history, candidates, args.now)
+    new_items, history_additions, seed_reports = filter_candidates(history, candidates, args.now, normalizer)
 
     output = {
         "new_items": new_items,

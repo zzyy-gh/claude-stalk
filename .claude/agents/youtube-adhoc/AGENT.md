@@ -10,7 +10,7 @@ Run the full audio pipeline on a single YouTube URL, producing output in `output
 
 ## Inputs
 
-- A URL (required) — YouTube, X post, or web article
+- A YouTube URL (required) — must be a YouTube video URL
 
 ## Steps
 
@@ -22,15 +22,14 @@ Run `bash scripts/get-timestamp.sh` to get the actual current time. It outputs t
 
 Do not guess or infer the time from other sources -- always check the real clock.
 
-### 1. Detect URL type and route
+### 1. Validate URL
 
-- **YouTube URL** (contains `youtube.com` or `youtu.be`) → Audio pipeline
-- **X/Twitter URL** (contains `x.com` or `twitter.com`) → X pipeline (limited — analyze single post)
-- **Other URL** → Audio pipeline (web article path via ingest-audio)
+- **YouTube URL** (contains `youtube.com` or `youtu.be`) → proceed with audio pipeline
+- **Non-YouTube URL** → stop and tell the user to use `webpage-adhoc` for web articles or `x-digest` for X posts
 
 ---
 
-## Audio Pipeline (YouTube / Web article)
+## Audio Pipeline (YouTube only)
 
 ### 2. Ingest + Transcribe
 

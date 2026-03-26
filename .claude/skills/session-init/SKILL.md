@@ -1,6 +1,6 @@
 ---
 name: session-init
-description: "Create a new monitoring session. Trigger: 'create session', 'new session', 'add session', 'session-init'. Supports youtube-digest (audio) and x-digest (X) session types."
+description: "Create a new monitoring session. Trigger: 'create session', 'new session', 'add session', 'session-init'. Supports youtube-digest (audio), x-digest (X), and webpage-digest (webpage) session types."
 version: "2.0"
 ---
 
@@ -13,7 +13,7 @@ Interactive wizard to create a new monitoring session for any supported content 
 1. **Ask for category**:
    - `youtube-digest` — YouTube channels and RSS feeds (audio/video content)
    - `x-digest` — X (Twitter) lists or Following feed
-   - Future: `website` — web monitoring
+   - `webpage-digest` — Blogs and websites via RSS/Atom feeds
 
 2. **Ask for session name**:
    - Get a short descriptive name (e.g., "ai-research", "tai-ai", "tech-podcasts")
@@ -46,6 +46,20 @@ Ask for sources (one at a time, loop until user says done):
 - **Days**: Lookback window in days (default: 1)
 - **Prompt**: Custom analysis prompt (default: VC/AI focused)
 
+### Webpage Stalker (webpage)
+
+Ask for sources (one at a time, loop until user says done):
+
+**Webpage source**:
+- Accept the blog/site homepage URL (e.g., `https://blog.anthropic.com`)
+- Optionally accept an explicit RSS feed URL (`feed_url`)
+- If no `feed_url` provided, it will be auto-discovered on first stalk run
+- Ask for a human-readable name
+- Optionally ask if the site needs `method: playwright` (for JS-rendered sites)
+- Optionally capture `notes` for edge cases
+
+**Prompt**: Custom analysis prompt (default: VC/AI focused)
+
 4. **Ask for export directory** (optional):
    - Where should HTML results be exported?
    - Default: `null` (results stay in the update folder)
@@ -65,5 +79,13 @@ Write `stalk-history.yaml` and `retry.yaml` as `[]`.
 mkdir -p output/x-digest/{name}/updates
 ```
 Use template: `.claude/skills/session-init/assets/config-template-x.yaml`
+
+### Webpage Stalker
+```bash
+mkdir -p output/webpage-digest/{name}/updates
+```
+Use template: `.claude/skills/session-init/assets/config-template-webpage.yaml`
+
+Write `stalk-history.yaml` and `retry.yaml` as `[]`.
 
 6. **Confirm**: Print the created config and session path. Suggest running the appropriate agent.

@@ -55,6 +55,14 @@ Read both files, then verify:
 - Skipped content section has box divs with `background-color:#f8f9fa`
 - Body paragraphs have explicit `<p>` styling
 
+**Webpage:**
+- Article cards have `background-color:#f8f9fa` wrapping (same as audio cards)
+- Source metadata pill present (span with `background-color:#d0ebff`)
+- No `**Published**:` pill (webpages don't include publish date in metadata line)
+- No timestamp deep links (`font-family:Courier New` should NOT appear)
+- Body paragraphs inside cards use `<p>` styling
+- Optional Guest(s) pill with `background-color:#fff3bf` (only for interviews)
+
 ## Report
 
 ```

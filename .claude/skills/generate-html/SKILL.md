@@ -12,7 +12,7 @@ Convert a markdown summary or digest to styled HTML. Supports multiple content c
 ## Inputs
 
 - `SUMMARY`: path to the markdown file (e.g., `summary.md` or `digest.md`)
-- `CATEGORY`: content category — `audio` or `x` (determines which template/styles to use)
+- `CATEGORY`: content category — `audio`, `x`, or `webpage` (determines which template/styles to use)
 - `OUTPUT`: path to write the HTML file
 
 ## Template Dispatch
@@ -23,6 +23,7 @@ Based on `CATEGORY`, select the appropriate template and styles:
 |----------|----------|--------|
 | `audio` | `.claude/skills/generate-html/assets/html-template-audio.html` | `.claude/skills/generate-html/assets/html-styles-audio.md` |
 | `x` | `.claude/skills/generate-html/assets/html-template-x.html` | `.claude/skills/generate-html/assets/html-styles-x.md` |
+| `webpage` | `.claude/skills/generate-html/assets/html-template-webpage.html` | `.claude/skills/generate-html/assets/html-styles-webpage.md` |
 
 Future categories just add new template + styles files — no skill logic changes needed.
 

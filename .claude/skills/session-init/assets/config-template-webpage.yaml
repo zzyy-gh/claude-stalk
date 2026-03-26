@@ -1,0 +1,24 @@
+name: "{SESSION_NAME}"
+enabled: true
+sources:
+  # Webpage source with known RSS feed:
+  # - type: webpage
+  #   url: "https://blog.anthropic.com"
+  #   name: "Anthropic Blog"
+  #   feed_url: "https://blog.anthropic.com/rss.xml"
+  #
+  # Webpage source with auto-discovery (feed_url omitted):
+  # - type: webpage
+  #   url: "https://openai.com/blog"
+  #   name: "OpenAI Blog"
+  #
+  # Source requiring playwright (JS-rendered):
+  # - type: webpage
+  #   url: "https://some-spa-site.com/blog"
+  #   name: "SPA Site"
+  #   method: playwright
+  #   notes: "JS-rendered, WebFetch returns empty content"
+prompt: |
+  Focus on AI development, industry trends, macro news,
+  and items a VC might directly or indirectly benefit from knowing.
+export_dir: null

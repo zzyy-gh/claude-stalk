@@ -1,0 +1,12 @@
+title: "Nvidia -- The Inference Kingdom Expands"
+url: "https://newsletter.semianalysis.com/p/nvidia-the-inference-kingdom-expands"
+source_name: "Semianalysis"
+published: "2026-03-24"
+relevance: relevant
+skip_reason: null
+summary: |
+  Semianalysis provides deep technical coverage of Nvidia's GTC 2026 announcements, centered on three new systems: Groq LPX, Vera ETL256, and STX. The marquee development is Attention FFN Disaggregation (AFD), which splits transformer operations between GPUs (for attention with dynamic KV cache) and Groq LPUs (for deterministic FFN computations), maximizing both latency and throughput. The LP30 LPU features 500MB on-chip SRAM and 1.2 PFLOPS FP8 on Samsung SF4X. Nvidia's CPO roadmap prioritizes copper where feasible -- Rubin NVL72 is all-copper, with CPO reserved for inter-rack connections at NVL576+ scale. Kyber racks now pack 144 GPUs across 36 blades with 72 NVLink 7 switches. A dedicated Vera ETL256 CPU rack addresses bottlenecks in RL, simulation, and preprocessing. The overall strategy is heterogeneous compute with comprehensive infrastructure standards spanning compute, networking, and storage layers for hyperscale inference.
+paywall: false
+paywall_note: null
+extraction_method: webfetch
+word_count: 700

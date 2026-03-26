@@ -5,6 +5,7 @@ description: >
   Handles formatting, URL verification, and quality checks.
   Trigger phrases: "write digest", "generate digest", "build x summary".
 version: "1.0"
+forked: true
 compatibility: "None — file I/O only."
 ---
 

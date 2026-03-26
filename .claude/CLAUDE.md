@@ -1,15 +1,15 @@
 # Claude Stalk
 
-Unified content monitoring and intelligence platform. Monitors YouTube channels, RSS feeds, X (Twitter) feeds, and webpages/blogs, producing VC/AI-focused briefings as markdown + styled HTML.
+Unified content monitoring and intelligence platform. Monitors YouTube channels, RSS feeds, X (Twitter) feeds, and webpages/blogs, producing VC/AI-focused digests as markdown + styled HTML.
 
 ## Content Categories
 
 | Category | Directory | Sources | Agent |
 |----------|-----------|---------|-------|
-| **YouTube Stalker** | `output/youtube-digest/` | YouTube channels, RSS feeds | `youtube-digest` |
-| **X Stalker** | `output/x-digest/` | X lists, X Following feed | `x-digest` |
+| **YouTube Digest** | `output/youtube-digest/` | YouTube channels, RSS feeds | `youtube-digest` |
+| **X Digest** | `output/x-digest/` | X lists, X Following feed | `x-digest` |
 | **YouTube Adhoc** | `output/youtube-adhoc/` | Single YouTube URLs | `youtube-adhoc` |
-| **Webpage Stalker** | `output/webpage-digest/` | Blogs, websites via RSS | `webpage-digest` |
+| **Webpage Digest** | `output/webpage-digest/` | Blogs, websites via RSS | `webpage-digest` |
 | **Webpage Adhoc** | `output/webpage-adhoc/` | One or more webpage URLs | `webpage-adhoc` |
 
 ## Agents
@@ -20,9 +20,9 @@ Agents are multi-step orchestrators that chain skills together. They live in `.c
 |---|---|---|
 | **youtube-digest** | Full YouTube/audio pipeline: stalk, ingest, transcribe, analyze, summarize | "run update", "check all", "scheduled check" |
 | **x-digest** | X digest pipeline: scrape, analyze, summarize | "run digest", "digest my feed", "run x digest" |
-| **youtube-adhoc** | Ad-hoc processing of a single YouTube URL | "summarize this", "summarize this video" |
-| **webpage-digest** | Full webpage pipeline: stalk RSS, ingest, analyze, summarize | "run webpage update", "check blogs" |
-| **webpage-adhoc** | Ad-hoc processing of one or more webpage URLs | "summarize this article", "summarize this page" |
+| **youtube-adhoc** | Ad-hoc processing of a single YouTube URL | "summarize", "summarize this", "summarize this video" |
+| **webpage-digest** | Full webpage pipeline: stalk RSS, ingest, analyze, summarize | "run webpage update", "check blogs", "run webpage-digest" |
+| **webpage-adhoc** | Ad-hoc processing of one or more webpage URLs | "summarize this article", "summarize this page", "summarize these articles" |
 | **tester** | Quality checks on workspace (docs, scripts, configs) | "test", "verify", "run checks" |
 
 ## Skills

@@ -4,7 +4,7 @@ description: "Full webpage monitoring pipeline: checks RSS feeds, ingests articl
 version: "1.0"
 ---
 
-# Agent: Webpage Stalker
+# Agent: Webpage Digest
 
 Full pipeline orchestrator for webpage/blog content. Checks RSS feeds for new articles, ingests content, analyzes, and produces summaries.
 
@@ -30,6 +30,13 @@ When `SESSION` is `all` (or omitted):
 
 When `SESSION` is a specific name:
 - Run the pipeline for `output/webpage-digest/{SESSION}/` only
+
+## Notification
+
+Send Telegram notifications:
+
+- On start: `bash scripts/notify-telegram.sh "[claude-stalk] Webpage Digest check started."`
+- On input needed: `bash scripts/notify-telegram.sh "[claude-stalk] Need your input -- check Remote Control"`
 
 ## Pipeline (per session)
 

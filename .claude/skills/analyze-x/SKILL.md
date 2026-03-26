@@ -5,6 +5,7 @@ description: >
   analyzes them, and produces enriched notes for digest generation.
   Trigger phrases: "analyze posts", "triage feed", "analyze feed data".
 version: "1.0"
+forked: true
 compatibility: "Requires playwright-headless MCP server for visiting external links and viewing images."
 ---
 

@@ -22,7 +22,7 @@ Interactive wizard to create a new monitoring session for any supported content 
 
 3. **Category-specific source setup**:
 
-### YouTube Stalker (audio)
+### YouTube Digest (audio)
 
 Ask for sources (one at a time, loop until user says done):
 
@@ -39,14 +39,14 @@ Ask for sources (one at a time, loop until user says done):
 
 **Frequency**: Default `6h`, options: `1h`, `6h`, `12h`, `24h`
 
-### X Stalker (X)
+### X Digest (X)
 
 - **Source**: `"following"` or an X list URL
 - **Account**: Session identifier for multi-account management (default: `"main"`)
 - **Days**: Lookback window in days (default: 1)
 - **Prompt**: Custom analysis prompt (default: VC/AI focused)
 
-### Webpage Stalker (webpage)
+### Webpage Digest (webpage)
 
 Ask for sources (one at a time, loop until user says done):
 
@@ -66,7 +66,7 @@ Ask for sources (one at a time, loop until user says done):
 
 5. **Create session structure**:
 
-### YouTube Stalker
+### YouTube Digest
 ```bash
 mkdir -p output/youtube-digest/{name}/updates
 ```
@@ -74,13 +74,13 @@ Use template: `.claude/skills/session-init/assets/config-template-audio.yaml`
 
 Write `stalk-history.yaml` and `retry.yaml` as `[]`.
 
-### X Stalker
+### X Digest
 ```bash
 mkdir -p output/x-digest/{name}/updates
 ```
 Use template: `.claude/skills/session-init/assets/config-template-x.yaml`
 
-### Webpage Stalker
+### Webpage Digest
 ```bash
 mkdir -p output/webpage-digest/{name}/updates
 ```

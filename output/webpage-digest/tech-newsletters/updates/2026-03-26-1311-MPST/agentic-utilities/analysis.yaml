@@ -1,0 +1,12 @@
+title: "Agentic Utilities"
+url: "https://citriniresearch.com/p/agentic-utilities"
+source_name: "Citrini"
+published: "2026-03-25"
+relevance: relevant
+skip_reason: null
+summary: |
+  Citrini frames the current AI moment as the "Agentic Era" -- the third phase of AI adoption following infrastructure hyperscaling and democratization. The catalyst was OpenClaw, an open-sourced agentic library that enabled AI to shift from reactive chatbots to autonomous task handlers running overnight. The piece identifies three investment winner categories: infrastructure (CDN providers like Cloudflare and Akamai showing revenue inflections from agentic traffic), ecosystem (a new "B2A" vertical for payment rails, stablecoins, and agentic wallets enabling non-human financial transactions), and governance (observability and counter-AI solutions for rogue agent protection). Jensen Huang's suggestion that engineers should consume $250K in annual tokens highlights the computational intensity of agentic workloads. The full analysis is behind a paywall.
+paywall: true
+paywall_note: "Summary based on free preview; detailed analysis of specific stocks and theses behind paywall."
+extraction_method: webfetch
+word_count: 350

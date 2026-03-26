@@ -54,4 +54,4 @@ sources:
     handle: "business"
     name: "Bloomberg Originals"
 frequency: "6h"
-output_dir: "C:\\Users\\zzyy\\OneDrive\\aiconic\\youtube updates"
+output_dir: "C:\\Users\\zzyy\\OneDrive\\aiconic\\daily feed\\youtube updates"

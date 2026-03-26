@@ -38,7 +38,7 @@ Check documentation, skill/agent setup, and cross-references for soundness. Fast
    - Script references in skills/agents (e.g., `scripts/slugify.sh`) ↔ actual script files
    - Template/asset references ↔ actual asset files
 5. **Pipeline coherence** — agent pipelines reference skills in correct order, skill inputs match upstream outputs
-6. **Config templates** — session-init templates in `assets/` are valid YAML
+6. **Config templates** — session-init templates in `.claude/skills/session-init/assets/` are valid YAML
 
 ### Report format
 
@@ -115,12 +115,12 @@ Run all checks from Mode 1 (docs) and Mode 2 (scripts), then additionally:
 
 ### Config integrity
 
-1. **YouTube Stalker sessions** — scan all `output/youtube-digest/*/config.yaml`:
+1. **YouTube Digest sessions** — scan all `output/youtube-digest/*/config.yaml`:
    - Valid YAML with required fields: `name`, `enabled`, `sources`
    - Each source has `type`, `id` (YouTube) or `url` (RSS), and `name`
    - `stalk-history.yaml` and `retry.yaml` exist
 
-2. **X Stalker sessions** — scan all `output/x-digest/*/config.yaml`:
+2. **X Digest sessions** — scan all `output/x-digest/*/config.yaml`:
    - Valid YAML with required fields: `name`, `enabled`, `source`
    - `account` field present (or defaults to "main")
 
@@ -137,10 +137,10 @@ Append to the docs + scripts report:
 ```
 ## Config Integrity
 
-### YouTube Stalker Sessions
+### YouTube Digest Sessions
 - X sessions checked, Y issues
 
-### X Stalker Sessions
+### X Digest Sessions
 - X sessions checked, Y issues
 
 ### HTML Templates

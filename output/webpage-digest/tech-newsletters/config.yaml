@@ -1,0 +1,38 @@
+name: "tech-newsletters"
+enabled: true
+sources:
+  - type: webpage
+    url: "https://newsletter.semianalysis.com"
+    name: "Semianalysis"
+  - type: webpage
+    url: "https://www.citriniresearch.com"
+    name: "Citrini"
+  - type: webpage
+    url: "https://stratechery.com"
+    name: "Stratechery - Ben Thompson"
+    feed_url: "https://stratechery.com/feed/"
+  - type: webpage
+    url: "https://tspasemiconductor.substack.com"
+    name: "Semivision"
+  - type: webpage
+    url: "https://www.interconnects.ai"
+    name: "Interconnect by Nathan Lambert"
+  - type: webpage
+    url: "https://globalsemiresearch.substack.com"
+    name: "Global Semi Research"
+  - type: webpage
+    url: "https://michaelparekh.substack.com"
+    name: "Michael Parekh"
+  - type: webpage
+    url: "https://contraryresearch.substack.com"
+    name: "Contrary Research"
+  - type: webpage
+    url: "https://simonw.substack.com"
+    name: "Simon Wilson's Newsletter"
+  - type: webpage
+    url: "https://linas.substack.com"
+    name: "Linas's Newsletter"
+prompt: |
+  Focus on AI development, semiconductor industry, industry trends, macro news,
+  and items a VC might directly or indirectly benefit from knowing.
+export_dir: "C:\\Users\\zzyy\\OneDrive\\aiconic\\daily feed\\webpage updates"

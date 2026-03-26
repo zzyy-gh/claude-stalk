@@ -12,9 +12,10 @@ Webpage category is a hybrid of audio (card wrappers for articles) and x (body p
 - Body paragraphs inside cards -> `<p style="font-size:15px; color:#495057; margin:0 0 12px 0; line-height:1.7;">`
 - "What happened" block -> `<div style="background-color:#edf2ff; border-left:4px solid #364fc7; padding:16px 20px; margin:24px 0 12px 0; font-size:15px; color:#495057; line-height:1.7;">...</div>`
 - "What to watch" block -> same as above
-- Source metadata pills:
+- Metadata pills:
   - Source pill: `<span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#d0ebff; color:#1864ab;">Source: ...</span>`
-  - Guest(s) pill (optional): `<span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#fff3bf; color:#e67700;">Guest(s): ...</span>`
+  - Published pill: `<span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#e6fcf5; color:#087f5b;">Published: ...</span>`
+  - People pill (optional): `<span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#f3d9fa; color:#862e9c;">People: ...</span>`
 - Skipped table -> standard table styles (same as audio/x)
 - No new content list -> `<div>` with inline badge spans (same as audio)
 - `**bold**` -> `<strong style="color:#1a1a2e;">`
@@ -26,6 +27,5 @@ Webpage category is a hybrid of audio (card wrappers for articles) and x (body p
 ## Key differences from audio
 
 - No timestamp links (no `[MM:SS]` deep links)
-- No `**Published**:` pill (webpages don't show publish dates in the summary metadata line)
 - Body paragraphs instead of key moment lists
 - Card wrapper used for each article (same as audio) to give visual separation

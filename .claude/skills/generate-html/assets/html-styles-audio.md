@@ -10,11 +10,11 @@ All styles must be inline (`style=""` attributes) for email client compatibility
 - Overview paragraph → `<div style="background-color:#edf2ff; border-left:4px solid #364fc7; padding:16px 20px; margin:24px 0; font-size:15px; color:#495057;">...</div>`
 - "What happened" / "What to watch" blocks → `<div style="background-color:#edf2ff; border-left:4px solid #364fc7; padding:16px 20px; margin:24px 0 12px 0; font-size:15px; color:#495057;"><strong style="color:#1a1a2e;">What happened:</strong> ...</div>` (same style for both blocks)
 - Relevant item card (from `###` through key moments) → `<div style="background-color:#f8f9fa; border:1px solid #dee2e6; padding:20px 24px; margin-bottom:20px;">...</div>`
-- `**Source**: ... | **Guest(s)**: ... | **Published**: ...` metadata → pill spans:
+- `**Source**: ... | **People**: ... | **Published**: ...` metadata → pill spans:
   ```html
   <div style="margin-bottom:12px; font-size:13px;">
     <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#d0ebff; color:#1864ab;">Source: <a href="..." style="color:#1971c2; text-decoration:none;">name</a></span>
-    <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#fff3bf; color:#e67700;">Guest(s): name</span>
+    <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#f3d9fa; color:#862e9c;">People: name</span>
     <span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; font-weight:500; background-color:#e6fcf5; color:#087f5b;">Published: date</span>
   </div>
   ```

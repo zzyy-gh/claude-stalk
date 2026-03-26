@@ -1,0 +1,12 @@
+title: "The memory sector has plummeted, what is the market panicking about?"
+url: "https://globalsemiresearch.substack.com/p/the-memory-sector-has-plummeted-what"
+source_name: "Global Semi Research"
+published: "2026-03-26"
+relevance: relevant
+skip_reason: null
+summary: |
+  Memory chip stocks (Micron, SK Hynix, Samsung, Kioxia) sold off sharply on fears that Google's TurboQuant compression algorithm could reduce memory requirements by 6x. The article debunks the panic on three grounds: the paper is from April 2025, the 6x compression applies only to KV cache during inference (not model weights or training), higher compression ratios increase decompression latency which is unacceptable for inference scenarios, and historically efficiency gains expand total demand via Jevons Paradox rather than reducing it. The piece argues the selloff is irrational and that longer context windows and larger batch sizes enabled by compression will ultimately increase overall memory requirements.
+paywall: false
+paywall_note: null
+extraction_method: webfetch
+word_count: 250

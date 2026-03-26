@@ -2,6 +2,7 @@
 name: verify-html
 description: "Verify generated HTML against its source markdown. Called by agents after generate-html."
 version: "1.0"
+forked: true
 ---
 
 # Skill: Verify HTML
@@ -58,10 +59,10 @@ Read both files, then verify:
 **Webpage:**
 - Article cards have `background-color:#f8f9fa` wrapping (same as audio cards)
 - Source metadata pill present (span with `background-color:#d0ebff`)
-- No `**Published**:` pill (webpages don't include publish date in metadata line)
+- Published pill present (span with `background-color:#e6fcf5`)
+- Optional People pill with `background-color:#f3d9fa` (when notable people are mentioned)
 - No timestamp deep links (`font-family:Courier New` should NOT appear)
 - Body paragraphs inside cards use `<p>` styling
-- Optional Guest(s) pill with `background-color:#fff3bf` (only for interviews)
 
 ## Report
 

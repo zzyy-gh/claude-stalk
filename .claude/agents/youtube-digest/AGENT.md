@@ -4,7 +4,7 @@ description: "Full YouTube/audio pipeline: checks feeds, ingests, transcribes, a
 version: "1.0"
 ---
 
-# Agent: YouTube Stalker
+# Agent: YouTube Digest
 
 Full pipeline orchestrator for YouTube/audio content. Checks feeds, ingests new content, transcribes, and produces summaries.
 
@@ -35,7 +35,7 @@ When `SESSION` is a specific name:
 
 Always send Telegram notifications at these points:
 
-- On start: `bash scripts/notify-telegram.sh "[claude-stalk] YouTube Stalker check started."`
+- On start: `bash scripts/notify-telegram.sh "[claude-stalk] YouTube Digest check started."`
 - On input needed: `bash scripts/notify-telegram.sh "[claude-stalk] Need your input -- check Remote Control"`
 
 ## Pipeline (per session)

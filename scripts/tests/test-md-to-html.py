@@ -130,17 +130,17 @@ class TestAudioMetadataPills(unittest.TestCase):
     """Test audio metadata pill rendering."""
 
     def test_metadata_pills(self):
-        md = "**Source**: TechPod | **Guest(s)**: Jane Doe | **Published**: 2026-03-20"
+        md = "**Source**: TechPod | **People**: Jane Doe | **Published**: 2026-03-20"
         result = convert_markdown(md, "audio")
         self.assertIn('background-color:#d0ebff', result)
         self.assertIn('Source: TechPod', result)
-        self.assertIn('background-color:#fff3bf', result)
-        self.assertIn('Guest(s): Jane Doe', result)
+        self.assertIn('background-color:#f3d9fa', result)
+        self.assertIn('People: Jane Doe', result)
         self.assertIn('background-color:#e6fcf5', result)
         self.assertIn('Published: 2026-03-20', result)
 
     def test_metadata_not_rendered_for_x(self):
-        md = "**Source**: TechPod | **Guest(s)**: Jane Doe | **Published**: 2026-03-20"
+        md = "**Source**: TechPod | **People**: Jane Doe | **Published**: 2026-03-20"
         result = convert_markdown(md, "x")
         # For x category it should be a paragraph, not pills
         self.assertNotIn('background-color:#d0ebff', result)
@@ -150,7 +150,7 @@ class TestAudioItemCards(unittest.TestCase):
     """Test audio item card wrapping."""
 
     def test_card_wrapping(self):
-        md = "### [Episode Title](https://example.com)\n**Source**: Pod | **Guest(s)**: Bob | **Published**: 2026-01-01\n- First key point\n- Second key point"
+        md = "### [Episode Title](https://example.com)\n**Source**: Pod | **People**: Bob | **Published**: 2026-01-01\n- First key point\n- Second key point"
         result = convert_markdown(md, "audio")
         # Card div
         self.assertIn('background-color:#f8f9fa; border:1px solid #dee2e6; padding:20px 24px', result)
@@ -222,7 +222,7 @@ class TestEndToEnd(unittest.TestCase):
         template = (
             '<!DOCTYPE html>\n<html lang="en">\n<head>\n'
             '<meta charset="UTF-8">\n'
-            '<title>VC/AI Briefing</title>\n</head>\n'
+            '<title>YouTube Digest</title>\n</head>\n'
             '<body style="margin:0; padding:32px 16px; font-family:Arial, Helvetica, sans-serif;">\n'
             '<div style="max-width:740px; margin:0 auto;">\n'
             '{content}\n'
@@ -230,10 +230,10 @@ class TestEndToEnd(unittest.TestCase):
         )
 
         md = (
-            "# VC/AI Daily Briefing\n\n"
+            "# YouTube Digest\n\n"
             "## Key Stories\n\n"
             "### [AI Startup Raises $50M](https://example.com/story)\n"
-            "**Source**: TechCrunch | **Guest(s)**: CEO | **Published**: 2026-03-23\n"
+            "**Source**: TechCrunch | **People**: CEO | **Published**: 2026-03-23\n"
             "- [00:05:12](https://yt.com/t=312) Funding details and valuation\n"
             "- [00:12:30](https://yt.com/t=750) Market strategy discussion\n\n"
             "**What happened:** A major AI startup closed a Series B round.\n\n"
@@ -268,7 +268,7 @@ class TestEndToEnd(unittest.TestCase):
 
             # H1
             self.assertIn('<h1 style="font-size:28px;', html_output)
-            self.assertIn('VC/AI Daily Briefing', html_output)
+            self.assertIn('YouTube Digest', html_output)
 
             # H2
             self.assertIn('<h2 style="font-size:20px;', html_output)
@@ -325,12 +325,12 @@ class TestWebpageCategory(unittest.TestCase):
         # Should NOT have a Published pill
         self.assertNotIn('Published:', result)
 
-    def test_source_with_guest_pill(self):
-        md = '**Source**: [OpenAI Blog](https://openai.com) | **Guest(s)**: Sam Altman, CEO'
+    def test_source_with_people_pill(self):
+        md = '**Source**: [OpenAI Blog](https://openai.com) | **People**: Sam Altman, CEO'
         result = convert_markdown(md, "webpage")
         self.assertIn('background-color:#d0ebff', result)
-        self.assertIn('background-color:#fff3bf', result)
-        self.assertIn('Guest(s):', result)
+        self.assertIn('background-color:#f3d9fa', result)
+        self.assertIn('People:', result)
         self.assertIn('Sam Altman, CEO', result)
 
     def test_body_paragraph_inside_card(self):
@@ -384,12 +384,12 @@ class TestWebpageCategory(unittest.TestCase):
         self.assertIn('<table', result)
         self.assertIn('Not relevant', result)
 
-    def test_source_only_not_detected_as_audio_metadata(self):
-        """Source-only line should NOT be detected when category is audio."""
+    def test_source_only_detected_as_metadata(self):
+        """Source-only line should render as metadata pill for any category."""
         md = '**Source**: [Blog](https://blog.com)'
         result = convert_markdown(md, "audio")
-        # Audio requires both Source AND Published, so this falls through to paragraph
-        self.assertNotIn('background-color:#d0ebff', result)
+        self.assertIn('background-color:#d0ebff', result)
+        self.assertIn('Source:', result)
 
 
 if __name__ == '__main__':

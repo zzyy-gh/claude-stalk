@@ -1,13 +1,13 @@
 ---
 name: write-summary-audio
-description: "Read candidates.yaml files and a template to produce a VC/AI briefing summary for podcast/YouTube content. Supports batch (multi-item update) and single (youtube-adhoc) modes."
+description: "Read candidates.yaml files and a template to produce a YouTube Digest summary for podcast/YouTube content. Supports batch (multi-item update) and single (youtube-adhoc) modes."
 version: "1.0"
 forked: true
 ---
 
 # Skill: Write Summary Audio
 
-Read candidate key moments and a template to produce a VC/AI briefing summary.
+Read candidate key moments and a template to produce a YouTube Digest summary.
 
 ## Inputs
 
@@ -50,7 +50,7 @@ For each item, determine **relevance** to VC and AI:
 
 ### Batch mode (`MODE: batch`)
 
-- Heading: `# VC/AI Briefing -- {YYYY-MM-DD HH:MM TZ}`
+- Heading: `# YouTube Digest -- {YYYY-MM-DD HH:MM TZ}`
 - For **skipped** items: list them with a one-line reason why they were skipped
 - For items that **could not be transcribed** (missing captions, download failures): list them with the reason
 - For **channels with no new content**: list them with links to their YouTube channel pages (`https://www.youtube.com/@{handle}`)
@@ -58,6 +58,6 @@ For each item, determine **relevance** to VC and AI:
 
 ### Single mode (`MODE: single`)
 
-- Heading: `# VC/AI Briefing -- {title}` (use the video title, not the slug)
+- Heading: `# YouTube Digest -- {title}` (use the video title, not the slug)
 - No executive summary paragraph for the item — the "What happened" block in the overview serves this purpose
 - No "Skipped", "Not transcribed", "No new content" sections — this is a single-item summary

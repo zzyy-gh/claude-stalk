@@ -4,7 +4,7 @@ description: "X/Twitter digest pipeline: scrapes feeds, analyzes posts, produces
 version: "1.0"
 ---
 
-# Agent: X Stalker
+# Agent: X Digest
 
 Full pipeline orchestrator for X (Twitter) feed digests. Scrapes feeds, analyzes posts, and produces markdown + HTML digests.
 

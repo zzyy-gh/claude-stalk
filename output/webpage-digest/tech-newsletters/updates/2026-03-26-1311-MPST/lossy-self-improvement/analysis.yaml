@@ -1,0 +1,12 @@
+title: "Lossy self-improvement"
+url: "https://www.interconnects.ai/p/lossy-self-improvement"
+source_name: "Interconnect by Nathan Lambert"
+published: "2026-03-22"
+relevance: relevant
+skip_reason: null
+summary: |
+  Nathan Lambert challenges the "fast takeoff" narrative by proposing "lossy self-improvement" (LSI) as a more realistic model for AI progress -- where friction and inefficiencies prevent truly exponential recursive self-improvement. He identifies three core frictions: automatable AI research is too narrow (optimizing test loss differs from balancing the multiple objectives that drive real breakthroughs), parallel agents hit Amdahl's law diminishing returns when human supervision becomes the bottleneck, and organizational politics around compute allocation impose constraints automation cannot remove. Lambert argues models excel at "hill climbing" but struggle with paradigm shifts needed for continual learning and post-scaling innovations. His conclusion: AI progress will look "more linear than exponential" in retrospect, and the industry will remain in lossy self-improvement for several years.
+paywall: false
+paywall_note: null
+extraction_method: webfetch
+word_count: 450

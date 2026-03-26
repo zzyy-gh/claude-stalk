@@ -151,20 +151,18 @@ def _parse_table(lines, category):
 
 _PILL_PATTERNS = [
     (r'\*\*Source\*\*:\s*(.+?)(?:\s*\||\s*$)', 'background-color:#d0ebff; color:#1864ab;', 'Source'),
-    (r'\*\*Guest\(s\)\*\*:\s*(.+?)(?:\s*\||\s*$)', 'background-color:#fff3bf; color:#e67700;', 'Guest(s)'),
     (r'\*\*Published\*\*:\s*(.+?)(?:\s*\||\s*$)', 'background-color:#e6fcf5; color:#087f5b;', 'Published'),
+    (r'\*\*People\*\*:\s*(.+?)(?:\s*\||\s*$)', 'background-color:#f3d9fa; color:#862e9c;', 'People'),
 ]
 
 
 def _is_metadata_line(line, category='audio'):
     """Check if line is a metadata pill line."""
-    if category == 'webpage':
-        return '**Source**:' in line and '**Published**:' not in line
-    return '**Source**:' in line and '**Published**:' in line
+    return '**Source**:' in line
 
 
 def _render_metadata_pills(line, category='audio'):
-    """Render metadata pills from a line like **Source**: ... | **Guest(s)**: ... | **Published**: ..."""
+    """Render metadata pills from a line like **Source**: ... | **People**: ... | **Published**: ..."""
     pills = []
     for pattern, style, label in _PILL_PATTERNS:
         m = re.search(pattern, line)

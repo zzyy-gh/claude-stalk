@@ -1,4 +1,4 @@
-# Web Briefing -- {YYYY-MM-DD HH:MM TZ}
+# Web Digest -- {YYYY-MM-DD HH:MM TZ}
 
 ## Overview
 <!-- Context: how many articles found, how many relevant -->
@@ -10,8 +10,7 @@
 ## Articles
 
 ### [{Article Title}]({url})
-**Source**: [{source_name}]({source_base_url})
-<!-- If interview/Q&A: **Source**: [{source_name}]({source_base_url}) | **Guest(s)**: {name(s) with role} -->
+**Source**: [{source_name}]({source_base_url}) | **Published**: {YYYY-MM-DD HH:MM} | **People**: {name(s) or --}
 
 <!-- One paragraph summary (batch) or multi-paragraph deep analysis (single) -->
 <!-- For paywalled articles, append: _(paywalled -- {paywall_note})_ -->

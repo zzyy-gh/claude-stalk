@@ -1,4 +1,4 @@
-# VC/AI Briefing — {YYYY-MM-DD HH:MM TZ}
+# YouTube Digest -- {YYYY-MM-DD HH:MM TZ}
 
 ## Overview
 <!-- 2-3 sentences: what new content was found, how many relevant vs skipped -->
@@ -10,8 +10,8 @@
 ## Relevant
 
 ### [{Item Title}]({url})
-**Source**: [{source_name}](https://www.youtube.com/@{handle}) | **Speaker(s)**: {name(s) with role} | **Published**: {YYYY-MM-DD HH:MM}
-<!-- Speaker(s): presenter for keynotes, host + guest(s) for interviews. Omit demo props or audience members -->
+**Source**: [{source_name}](https://www.youtube.com/@{handle}) | **Published**: {YYYY-MM-DD HH:MM} | **People**: {name(s) with role, or --}
+<!-- People: presenter for keynotes, host + guest(s) for interviews. Use -- if none identified -->
 
 <!-- 2-3 sentence executive summary from a VC/AI perspective. What's the key insight, deal signal, market shift, or technology development that matters? -->
 

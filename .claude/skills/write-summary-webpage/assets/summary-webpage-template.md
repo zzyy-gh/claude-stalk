@@ -1,4 +1,4 @@
-# Blog Digest -- {YYYY-MM-DD HH:MM TZ}
+# Substack Digest -- {YYYY-MM-DD HH:MM TZ}
 
 ## Overview
 <!-- Context: how many articles found, how many relevant -->

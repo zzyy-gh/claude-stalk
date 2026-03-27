@@ -1,13 +1,13 @@
 ---
 name: write-summary-webpage
-description: "Read analysis.yaml files and a template to produce a web digest summary. Supports batch (webpage-digest) and single (webpage-adhoc) modes."
+description: "Read analysis.yaml files and a template to produce a webpage digest summary. Supports batch (webpage-digest) and single (webpage-adhoc) modes."
 version: "1.0"
 forked: true
 ---
 
 # Skill: Write Summary Webpage
 
-Read per-article analysis files and produce a web digest markdown summary.
+Read per-article analysis files and produce a Webpage digest markdown summary.
 
 ## Inputs
 
@@ -41,7 +41,7 @@ Read per-article analysis files and produce a web digest markdown summary.
 
 ### Batch mode (`MODE: batch`)
 
-- Heading: `# Blog Digest -- {YYYY-MM-DD HH:MM TZ}`
+- Heading: `# Substack Digest -- {YYYY-MM-DD HH:MM TZ}`
 - Overview with count: "N new articles found across M monitored sources."
 - Short What happened / What to watch
 - **Articles section**: one H3 per relevant article with Source line and one-paragraph summary
@@ -50,7 +50,7 @@ Read per-article analysis files and produce a web digest markdown summary.
 
 ### Single mode (`MODE: single`)
 
-- Heading: `# Blog Digest -- {Article Title}`
+- Heading: `# Substack Digest -- {Article Title}`
 - Overview: short TLDR
   - What happened: 2-3 sentences
   - What to watch: 2-3 sentences on implications

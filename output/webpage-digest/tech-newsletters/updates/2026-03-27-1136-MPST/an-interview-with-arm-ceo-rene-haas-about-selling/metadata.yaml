@@ -1,0 +1,15 @@
+title: "An Interview with Arm CEO Rene Haas About Selling Chips"
+source_url: "https://stratechery.com/2026/an-interview-with-arm-ceo-rene-haas-about-selling-chips/"
+source_name: "Stratechery - Ben Thompson"
+source_type: webpage
+date_published: "2026-03-26"
+date_processed: "2026-03-27 11:36 MPST"
+extraction_method: playwright
+speakers:
+  - name: "Ben Thompson"
+    role: "Stratechery founder/interviewer"
+  - name: "Rene Haas"
+    role: "CEO, Arm"
+paywall: false
+word_count: 8607
+language: "en"

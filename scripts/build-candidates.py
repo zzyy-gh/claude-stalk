@@ -61,7 +61,7 @@ def fetch_youtube(source, max_items):
     try:
         result = run_cmd(
             ["bash", script, handle, str(max_items)],
-            capture_output=True, text=True, encoding="utf-8", timeout=120,
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120,
         )
     except subprocess.TimeoutExpired:
         print(f"  FAIL: {name} — timed out", file=sys.stderr)

@@ -41,7 +41,7 @@ Read per-article analysis files and produce a web digest markdown summary.
 
 ### Batch mode (`MODE: batch`)
 
-- Heading: `# Web Digest -- {YYYY-MM-DD HH:MM TZ}`
+- Heading: `# Blog Digest -- {YYYY-MM-DD HH:MM TZ}`
 - Overview with count: "N new articles found across M monitored sources."
 - Short What happened / What to watch
 - **Articles section**: one H3 per relevant article with Source line and one-paragraph summary
@@ -50,7 +50,7 @@ Read per-article analysis files and produce a web digest markdown summary.
 
 ### Single mode (`MODE: single`)
 
-- Heading: `# Web Digest -- {Article Title}`
+- Heading: `# Blog Digest -- {Article Title}`
 - Overview: short TLDR
   - What happened: 2-3 sentences
   - What to watch: 2-3 sentences on implications

@@ -1,0 +1,12 @@
+title: "Anthropic stopped building a Chatbot and started building an Operating System"
+url: "https://linas.substack.com/p/fintechpulse1061"
+source_name: "Linas's Newsletter"
+published: "2026-03-26"
+relevance: relevant
+skip_reason: null
+summary: |
+  Linas argues that Anthropic has pivoted from building a chatbot to constructing an AI operating system. The latest Claude mobile update embeds functional instances of tools like Figma, Canva, and Amplitude directly within the chat interface -- users can prompt, edit, and sync changes back to source applications from their phones. This positions Claude as a "Super App for all knowledge work," comparable to WeChat but for the AI era. The strategic implication is that Anthropic is competing not just on model quality but on platform lock-in through workflow integration.
+paywall: false
+paywall_note: null
+extraction_method: webfetch
+word_count: 800

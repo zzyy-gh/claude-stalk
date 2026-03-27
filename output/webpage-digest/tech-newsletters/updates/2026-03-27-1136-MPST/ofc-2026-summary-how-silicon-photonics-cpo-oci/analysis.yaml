@@ -1,0 +1,12 @@
+title: "OFC 2026 Summary: How Silicon Photonics, CPO, OCI, and OCS Are Redefining AI Infrastructure Interconnect"
+url: "https://tspasemiconductor.substack.com/p/ofc-2026-summary-how-silicon-photonics"
+source_name: "Semivision"
+published: "2026-03-26"
+relevance: relevant
+skip_reason: null
+summary: |
+  Semivision's OFC 2026 conference summary argues that AI infrastructure's bottleneck has shifted from compute to interconnect -- the challenge now lies between chips, racks, and switches. The industry is moving beyond 1.6T specs toward 3.2T and 400G/lane architectures. Silicon photonics is maturing with 300mm manufacturing as a genuine inflection point, and integration is pushing closer to compute (from pluggable transceivers to co-packaged optics to on-package integration). Meta's 90-million-hour CPO reliability validation was a critical milestone, addressing the industry's hardest production-readiness question. The value center is shifting from modules to integrated platforms and advanced packaging, with implications for Taiwan's semiconductor supply chain.
+paywall: false
+paywall_note: null
+extraction_method: webfetch
+word_count: 1200

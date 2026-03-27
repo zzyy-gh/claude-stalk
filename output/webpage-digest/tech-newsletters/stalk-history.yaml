@@ -310,3 +310,24 @@
   source_type: webpage
   title: An Interview with Nvidia CEO Jensen Huang About Accelerated Computing
   url: https://stratechery.com/2026/an-interview-with-nvidia-ceo-jensen-huang-about-accelerated-computing
+- url: https://stratechery.com/2026/an-interview-with-arm-ceo-rene-haas-about-selling-chips
+  title: An Interview with Arm CEO Rene Haas About Selling Chips
+  source_name: Stratechery - Ben Thompson
+  source_type: webpage
+  first_seen: 2026-03-27 11:36 MPST
+  published: '2026-03-26T10:06:36Z'
+- url: https://linas.substack.com/p/fintechpulse1061
+  title: 'Anthropic stopped building a Chatbot and started building an Operating System
+    🤖📲; FinTech companies are becoming media companies: Plaid bought a newsletter
+    because plumbing isn’t enough anymore 💸📰'
+  source_name: Linas's Newsletter
+  source_type: webpage
+  first_seen: 2026-03-27 11:36 MPST
+  published: '2026-03-26T11:10:50Z'
+- url: https://tspasemiconductor.substack.com/p/ofc-2026-summary-how-silicon-photonics
+  title: 'OFC 2026 Summary: How Silicon Photonics, CPO, OCI, and OCS Are Redefining
+    the Physical Boundaries of Data Centers'
+  source_name: Semivision
+  source_type: webpage
+  first_seen: 2026-03-27 11:36 MPST
+  published: '2026-03-26T15:02:44Z'

@@ -1,0 +1,12 @@
+title: "An Interview with Arm CEO Rene Haas About Selling Chips"
+url: "https://stratechery.com/2026/an-interview-with-arm-ceo-rene-haas-about-selling-chips/"
+source_name: "Stratechery - Ben Thompson"
+published: "2026-03-26"
+relevance: relevant
+skip_reason: null
+summary: |
+  Arm CEO Rene Haas discusses the company's historic shift from pure IP licensing to selling its own chips, marking Arm's first-ever standalone keynote. The move is driven by AI's acceleration of the need for tighter hardware-software integration -- Haas argues that if you own the ISA, the chip is not the product, the system is. Meta is the first customer for Arm's own chips. The interview traces Arm's evolution from accidental mobile success (Nokia GSM, then iPhone) through compute subsystems to now competing directly with Nvidia's CPUs in data centers, with cloud-native workloads and Nvidia's own shift from x86 to Grace (ARM) providing the ecosystem foundation. Haas acknowledges the risk of alienating licensees but frames it as existential: in an AI world where models evolve faster than hardware, platform owners must control more of the stack.
+paywall: false
+paywall_note: null
+extraction_method: playwright
+word_count: 8607
